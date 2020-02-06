@@ -19,12 +19,10 @@ class _GNavState extends State<GNav> {
   @override
   void initState() {
     super.initState();
-    
   }
 
   @override
   Widget build(BuildContext context) {
-    
     selectedIndex = widget.selectedIndex;
 
     return Container(
@@ -101,7 +99,8 @@ class _GButtonState extends State<GButton> {
       gap: widget.gap,
       color: widget.color,
       icon: Icon(widget.icon,
-          color: widget.active ? widget.iconActiveColor : widget.iconColor, size: widget.iconSize),
+          color: widget.active ? widget.iconActiveColor : widget.iconColor,
+          size: widget.iconSize),
       text: Text(
         widget.text,
         style: widget.textStyle ??
@@ -187,6 +186,12 @@ class _ButtonState extends State<Button> with SingleTickerProviderStateMixin {
         // curve: _expanded ? Curves.easeInOutCirc : Curves.easeOutSine,
         // curve: _expanded ? Curves.fastOutSlowIn : Curves.easeOut,
         );
+  }
+
+  @override
+  void dispose() {
+    expandController.dispose();
+    super.dispose();
   }
 
   @override

@@ -1,3 +1,7 @@
+## 1.0.4
+
+* added missing dispose method for animation Controller
+
 ## 1.0.3
 
 * fix example and indentation, fixed icon size
