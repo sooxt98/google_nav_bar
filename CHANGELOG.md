@@ -1,3 +1,7 @@
+## 2.0.0
+
+* Customizable tab curve, duration and flexible tabs
+
 ## 1.0.4
 
 * added missing dispose method for animation Controller

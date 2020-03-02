@@ -5,10 +5,10 @@
 
 A modern google style nav bar for flutter.
 
-![demo](https://user-images.githubusercontent.com/13378059/71318444-01c77a80-24cc-11ea-8470-4a983d76fd11.gif)
+![demo](https://user-images.githubusercontent.com/13378059/75704883-2a05fd80-5cf5-11ea-8a38-a98446146f40.gif)
 
 
-GoogleNavBar is a Flutter widget designed by [cubertodesign](https://dribbble.com/shots/5925052-Google-Bottom-Bar-Navigation-Pattern/) and developed by [sooxt98](https://www.instagram.com/sooxt98/).
+GoogleNavBar is a Flutter widget designed by [Aurelien Salomon](https://dribbble.com/shots/5925052-Google-Bottom-Bar-Navigation-Pattern/) and developed by [sooxt98](https://www.instagram.com/sooxt98/).
 
 ![example](https://user-images.githubusercontent.com/13378059/71321360-2b47cc80-24f3-11ea-9b1b-389355ae8661.gif)
 
@@ -19,7 +19,7 @@ Add this to your package's `pubspec.yaml` file:
 ```
 ...
 dependencies:
-  google_nav_bar: ^1.0.1
+  google_nav_bar: ^2.0.0
   
 ```
 

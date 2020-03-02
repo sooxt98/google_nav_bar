@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:line_icons/line_icons.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:line_icons/line_icons.dart';
+
+// import 'package:google_nav_bar/google_nav_bar.dart';
 
 void main() => runApp(MyApp());
 
@@ -40,61 +42,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-
-    var padding = EdgeInsets.symmetric(horizontal: 12, vertical: 5);
-    double gap = 30;
-
-    tabs.add(GButton(
-      gap: gap,
-      iconActiveColor: Colors.purple,
-      iconColor: Colors.black,
-      textColor: Colors.purple,
-      color: Colors.purple.withOpacity(.2),
-      iconSize: 24,
-      padding: padding,
-      icon: LineIcons.home,
-      // textStyle: t.textStyle,
-      text: 'Home',
-    ));
-
-    tabs.add(GButton(
-      gap: gap,
-      iconActiveColor: Colors.pink,
-      iconColor: Colors.black,
-      textColor: Colors.pink,
-      color: Colors.pink.withOpacity(.2),
-      iconSize: 24,
-      padding: padding,
-      icon: LineIcons.heart_o,
-      // textStyle: t.textStyle,
-      text: 'Likes',
-    ));
-
-    tabs.add(GButton(
-      gap: gap,
-      iconActiveColor: Colors.amber[600],
-      iconColor: Colors.black,
-      textColor: Colors.amber[600],
-      color: Colors.amber[600].withOpacity(.2),
-      iconSize: 24,
-      padding: padding,
-      icon: LineIcons.search,
-      // textStyle: t.textStyle,
-      text: 'Search',
-    ));
-
-    tabs.add(GButton(
-      gap: gap,
-      iconActiveColor: Colors.teal,
-      iconColor: Colors.black,
-      textColor: Colors.teal,
-      color: Colors.teal.withOpacity(.2),
-      iconSize: 24,
-      padding: padding,
-      icon: LineIcons.user,
-      // textStyle: t.textStyle,
-      text: 'Profile',
-    ));
   }
 
   @override
@@ -102,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
         backgroundColor: Colors.white,
         body: AnimatedContainer(
-          duration: Duration(milliseconds: 600),
+          duration: Duration(milliseconds: 300),
           color: colors[selectedIndex],
           child: Center(
             child: Container(
@@ -117,7 +64,31 @@ class _MyHomePageState extends State<MyHomePage> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 16.0, vertical: 25),
                 child: GNav(
-                    tabs: tabs,
+                    gap: 8,
+                    color: Colors.grey[800],
+                    activeColor: Colors.purple,
+                    iconSize: 24,
+                    tabBackgroundColor: Colors.purple.withOpacity(0.1),
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                    duration: Duration(milliseconds: 1000),
+                    tabs: [
+                      GButton(
+                        icon: LineIcons.home,
+                        text: 'Home',
+                      ),
+                      GButton(
+                        icon: LineIcons.heart_o,
+                        text: 'Likes',
+                      ),
+                      GButton(
+                        icon: LineIcons.search,
+                        text: 'Search',
+                      ),
+                      GButton(
+                        icon: LineIcons.user,
+                        text: 'Profile',
+                      )
+                    ],
                     selectedIndex: selectedIndex,
                     onTabChange: (index) {
                       print(index);
