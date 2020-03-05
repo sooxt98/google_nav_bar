@@ -1,3 +1,7 @@
+## 2.0.1
+
+* Fix CupertinoIcons glitch
+
 ## 2.0.0
 
 * Customizable tab curve, duration and flexible tabs
