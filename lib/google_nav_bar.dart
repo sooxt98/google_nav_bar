@@ -17,6 +17,8 @@ class GNav extends StatefulWidget {
       this.iconSize,
       this.textStyle,
       this.curve,
+      this.tabMargin,
+      this.debug,
       this.duration});
 
   final List<GButton> tabs;
@@ -29,9 +31,11 @@ class GNav extends StatefulWidget {
   final Color tabBackgroundColor;
   final Color color;
   final EdgeInsetsGeometry padding;
+  final EdgeInsetsGeometry tabMargin;
   final TextStyle textStyle;
   final Duration duration;
   final Curve curve;
+  final bool debug;
 
   @override
   _GNavState createState() => _GNavState();
@@ -58,6 +62,8 @@ class _GNavState extends State<GNav> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: widget.tabs
                 .map((t) => GButton(
+                      debug: widget.debug ?? false,
+                      margin: t.margin ?? widget.tabMargin,
                       active: selectedIndex == widget.tabs.indexOf(t),
                       gap: t.gap ?? widget.gap,
                       iconActiveColor: t.iconActiveColor ?? widget.activeColor,
@@ -95,11 +101,13 @@ class _GNavState extends State<GNav> {
 
 class GButton extends StatefulWidget {
   final bool active;
+  final bool debug;
   final double gap;
   final Color iconColor;
   final Color iconActiveColor;
   final Color textColor;
   final EdgeInsetsGeometry padding;
+  final EdgeInsetsGeometry margin;
   final TextStyle textStyle;
   final double iconSize;
   final Function onPressed;
@@ -119,7 +127,9 @@ class GButton extends StatefulWidget {
       this.text,
       this.textColor,
       this.padding,
+      this.margin,
       this.duration,
+      this.debug,
       this.gap,
       this.curve,
       this.textStyle,
@@ -134,6 +144,7 @@ class _GButtonState extends State<GButton> {
   @override
   Widget build(BuildContext context) {
     return Button(
+      debug: widget.debug,
       duration: widget.duration,
       iconSize: widget.iconSize,
       active: widget.active,
@@ -141,6 +152,7 @@ class _GButtonState extends State<GButton> {
         widget.onPressed();
       },
       padding: widget.padding,
+      margin: widget.margin,
       gap: widget.gap,
       color: widget.backgroundColor,
       curve: widget.curve,
@@ -169,7 +181,8 @@ class Button extends StatefulWidget {
       this.curve,
       this.padding = const EdgeInsets.all(25),
       this.margin = const EdgeInsets.all(0),
-      this.active = false})
+      this.active = false,
+      this.debug})
       : super(key: key);
 
   final Widget icon;
@@ -178,6 +191,7 @@ class Button extends StatefulWidget {
   final Color color;
   final double gap;
   final bool active;
+  final bool debug;
   final VoidCallback onPressed;
   final EdgeInsetsGeometry padding;
   final EdgeInsetsGeometry margin;
@@ -227,95 +241,101 @@ class _ButtonState extends State<Button> with TickerProviderStateMixin {
       expandController.forward();
 
     return GestureDetector(
+      behavior: HitTestBehavior.translucent,
       onTap: () {
         widget.onPressed();
       },
-      child: AnimatedContainer(
-        // padding: EdgeInsets.symmetric(horizontal: 5),
-        padding: widget.padding,
-        // curve: Curves.easeOutQuad,
-        duration: Duration(
-            milliseconds: (widget.duration.inMilliseconds.toInt() / 2).round()),
-        margin: widget.margin,
-        decoration: BoxDecoration(
-            color: _expanded ? widget.color.withOpacity(0) : widget.color,
-            borderRadius: BorderRadius.all(Radius.circular(100))),
-        child: Stack(overflow: Overflow.visible, children: <Widget>[
-          Row(
-            children: <Widget>[
-              Container(
-                padding:
-                    EdgeInsets.symmetric(vertical: widget.padding.vertical / 2),
-                child: widget.icon,
-              ),
-            ],
-          ),
-          Container(
-            child: Row(
+      child: Container(
+        color: widget.debug ? Colors.red : null,
+        padding: widget.margin,
+        child: AnimatedContainer(
+          // padding: EdgeInsets.symmetric(horizontal: 5),
+          padding: widget.padding,
+          // curve: Curves.easeOutQuad,
+          duration: Duration(
+              milliseconds:
+                  (widget.duration.inMilliseconds.toInt() / 2).round()),
+          decoration: BoxDecoration(
+              color: _expanded ? widget.color.withOpacity(0) : widget.color,
+              borderRadius: BorderRadius.all(Radius.circular(100))),
+          child: Stack(overflow: Overflow.visible, children: <Widget>[
+            Row(
               children: <Widget>[
-                SizedBox(
-                    height: widget.iconSize + widget.padding.vertical,
-                    width: 0),
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    SizeTransition(
-                      axis: Axis.horizontal,
-                      axisAlignment: 1,
-                      sizeFactor: animation,
-                      child: AnimatedOpacity(
-                        opacity: _expanded ? 0.0 : 1.0,
-                        curve:
-                            _expanded ? Curves.easeOutQuint : Curves.easeInQuad,
-                        duration: Duration(
-                            milliseconds:
-                                (widget.duration.inMilliseconds.toInt() / 1.5)
-                                    .round()),
-                        child: Container(
-                            margin: EdgeInsets.only(
-                                left: widget.gap + widget.iconSize),
-                            alignment: Alignment.centerRight,
-                            child: widget.text),
-                      ),
-                    ),
-                  ],
+                Container(
+                  padding: EdgeInsets.symmetric(
+                      vertical: widget.padding.vertical / 2),
+                  child: widget.icon,
                 ),
               ],
             ),
-          ),
-          Container(
-            child: Row(
-              children: <Widget>[
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        Container(
-                            padding: EdgeInsets.symmetric(
-                                vertical: widget.padding.vertical / 2),
-                            child: widget.icon),
-                        SizeTransition(
-                          axis: Axis.horizontal,
-                          axisAlignment: 1,
-                          sizeFactor: animation,
-                          child: Opacity(
-                            opacity: 0, // debug use
-                            child: Container(
-                                color: Colors.red.withOpacity(.2),
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: widget.gap),
-                                child: widget.text),
-                          ),
+            Container(
+              child: Row(
+                children: <Widget>[
+                  SizedBox(
+                      height: widget.iconSize + widget.padding.vertical,
+                      width: 0),
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      SizeTransition(
+                        axis: Axis.horizontal,
+                        axisAlignment: 1,
+                        sizeFactor: animation,
+                        child: AnimatedOpacity(
+                          opacity: _expanded ? 0.0 : 1.0,
+                          curve: _expanded
+                              ? Curves.easeOutQuint
+                              : Curves.easeInQuad,
+                          duration: Duration(
+                              milliseconds:
+                                  (widget.duration.inMilliseconds.toInt() / 1.5)
+                                      .round()),
+                          child: Container(
+                              margin: EdgeInsets.only(
+                                  left: widget.gap + widget.iconSize),
+                              alignment: Alignment.centerRight,
+                              child: widget.text),
                         ),
-                      ],
-                    ),
-                  ],
-                ),
-              ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
-        ]),
+            Container(
+              child: Row(
+                children: <Widget>[
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Container(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: widget.padding.vertical / 2),
+                              child: widget.icon),
+                          SizeTransition(
+                            axis: Axis.horizontal,
+                            axisAlignment: 1,
+                            sizeFactor: animation,
+                            child: Opacity(
+                              opacity: 0, // debug use
+                              child: Container(
+                                  color: Colors.red.withOpacity(.2),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: widget.gap),
+                                  child: widget.text),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ]),
+        ),
       ),
     );
   }

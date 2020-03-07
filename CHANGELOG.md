@@ -1,3 +1,7 @@
+## 2.1.0
+
+* Added Expandable toucharea, `tabMargin` and `debug` attributes
+
 ## 2.0.1
 
 * Fix CupertinoIcons glitch
