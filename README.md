@@ -19,7 +19,7 @@ Add this to your package's `pubspec.yaml` file:
 ```
 ...
 dependencies:
-  google_nav_bar: ^2.0.1
+  google_nav_bar: ^2.2.0
   
 ```
 

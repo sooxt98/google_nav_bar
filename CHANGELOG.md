@@ -1,3 +1,7 @@
+## 2.2.0
+
+* Added Gradient Tab attributes
+
 ## 2.1.0
 
 * Added Expandable toucharea, `tabMargin` and `debug` attributes
