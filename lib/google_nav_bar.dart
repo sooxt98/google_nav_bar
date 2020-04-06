@@ -268,8 +268,11 @@ class _ButtonState extends State<Button> with TickerProviderStateMixin {
                   (widget.duration.inMilliseconds.toInt() / 2).round()),
           decoration: BoxDecoration(
             gradient: widget.gradient,
-              color: _expanded ? widget.color.withOpacity(0) : widget.color,
-              borderRadius: BorderRadius.all(Radius.circular(100))),
+            color: _expanded ? widget.color.withOpacity(0) : widget.gradient != null ? Colors.white : widget.color,
+            borderRadius: BorderRadius.all(
+              Radius.circular(100),
+            ),
+          ),
           child: Stack(overflow: Overflow.visible, children: <Widget>[
             Row(
               children: <Widget>[
