@@ -3,23 +3,25 @@ library google_nav_bar;
 import 'package:flutter/material.dart';
 
 class GNav extends StatefulWidget {
-  GNav(
-      {Key key,
-      this.tabs,
-      this.selectedIndex = 0,
-      this.onTabChange,
-      this.gap,
-      this.padding,
-      this.activeColor,
-      this.color,
-      this.backgroundColor,
-      this.tabBackgroundColor,
-      this.iconSize,
-      this.textStyle,
-      this.curve,
-      this.tabMargin,
-      this.debug,
-      this.duration});
+  GNav({
+    Key key,
+    this.tabs,
+    this.selectedIndex = 0,
+    this.onTabChange,
+    this.gap,
+    this.padding,
+    this.activeColor,
+    this.color,
+    this.backgroundColor,
+    this.tabBackgroundColor,
+    this.iconSize,
+    this.textStyle,
+    this.curve,
+    this.tabMargin,
+    this.debug,
+    this.duration,
+    this.tabBackgroundGradient,
+  });
 
   final List<GButton> tabs;
   final int selectedIndex;
@@ -36,6 +38,7 @@ class GNav extends StatefulWidget {
   final Duration duration;
   final Curve curve;
   final bool debug;
+  final Gradient tabBackgroundGradient;
 
   @override
   _GNavState createState() => _GNavState();
@@ -75,6 +78,8 @@ class _GNavState extends State<GNav> {
                       text: t.text,
                       icon: t.icon,
                       curve: widget.curve ?? Curves.ease,
+                      backgroundGradient:
+                          t.backgroundGradient ?? widget.tabBackgroundGradient,
                       backgroundColor: t.backgroundColor ??
                           widget.tabBackgroundColor ??
                           Colors.transparent,
@@ -116,25 +121,28 @@ class GButton extends StatefulWidget {
   final Color backgroundColor;
   final Duration duration;
   final Curve curve;
+  final Gradient backgroundGradient;
 
-  GButton(
-      {Key key,
-      this.active,
-      this.backgroundColor,
-      this.icon,
-      this.iconColor,
-      this.iconActiveColor,
-      this.text,
-      this.textColor,
-      this.padding,
-      this.margin,
-      this.duration,
-      this.debug,
-      this.gap,
-      this.curve,
-      this.textStyle,
-      this.iconSize,
-      this.onPressed});
+  GButton({
+    Key key,
+    this.active,
+    this.backgroundColor,
+    this.icon,
+    this.iconColor,
+    this.iconActiveColor,
+    this.text,
+    this.textColor,
+    this.padding,
+    this.margin,
+    this.duration,
+    this.debug,
+    this.gap,
+    this.curve,
+    this.textStyle,
+    this.iconSize,
+    this.onPressed,
+    this.backgroundGradient,
+  });
 
   @override
   _GButtonState createState() => _GButtonState();
@@ -155,6 +163,7 @@ class _GButtonState extends State<GButton> {
       margin: widget.margin,
       gap: widget.gap,
       color: widget.backgroundColor,
+      gradient: widget.backgroundGradient,
       curve: widget.curve,
       icon: Icon(widget.icon,
           color: widget.active ? widget.iconActiveColor : widget.iconColor,
@@ -169,21 +178,22 @@ class _GButtonState extends State<GButton> {
 }
 
 class Button extends StatefulWidget {
-  Button(
-      {Key key,
-      this.icon,
-      this.iconSize,
-      this.text,
-      this.gap = 0,
-      this.color,
-      this.onPressed,
-      this.duration,
-      this.curve,
-      this.padding = const EdgeInsets.all(25),
-      this.margin = const EdgeInsets.all(0),
-      this.active = false,
-      this.debug})
-      : super(key: key);
+  Button({
+    Key key,
+    this.icon,
+    this.iconSize,
+    this.text,
+    this.gap = 0,
+    this.color,
+    this.onPressed,
+    this.duration,
+    this.curve,
+    this.padding = const EdgeInsets.all(25),
+    this.margin = const EdgeInsets.all(0),
+    this.active = false,
+    this.debug,
+    this.gradient,
+  }) : super(key: key);
 
   final Widget icon;
   final double iconSize;
@@ -197,6 +207,7 @@ class Button extends StatefulWidget {
   final EdgeInsetsGeometry margin;
   final Duration duration;
   final Curve curve;
+  final Gradient gradient;
 
   @override
   _ButtonState createState() => _ButtonState();
@@ -246,7 +257,7 @@ class _ButtonState extends State<Button> with TickerProviderStateMixin {
         widget.onPressed();
       },
       child: Container(
-        color: widget.debug ? Colors.red : null,
+        color: widget.gradient != null ? null : widget.debug ? Colors.red : null,
         padding: widget.margin,
         child: AnimatedContainer(
           // padding: EdgeInsets.symmetric(horizontal: 5),
@@ -256,8 +267,12 @@ class _ButtonState extends State<Button> with TickerProviderStateMixin {
               milliseconds:
                   (widget.duration.inMilliseconds.toInt() / 2).round()),
           decoration: BoxDecoration(
-              color: _expanded ? widget.color.withOpacity(0) : widget.color,
-              borderRadius: BorderRadius.all(Radius.circular(100))),
+            gradient: widget.gradient,
+            color: _expanded ? widget.color.withOpacity(0) : widget.gradient != null ? Colors.white : widget.color,
+            borderRadius: BorderRadius.all(
+              Radius.circular(100),
+            ),
+          ),
           child: Stack(overflow: Overflow.visible, children: <Widget>[
             Row(
               children: <Widget>[
