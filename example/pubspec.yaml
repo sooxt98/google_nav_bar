@@ -1,4 +1,4 @@
-name: google_bottom_bar
+name: google_nav_bar_example
 description: A new Flutter project.
 
 # The following defines the version and build number for your application.
@@ -20,6 +20,7 @@ dependencies:
   flutter:
     sdk: flutter
   line_icons: ^0.2.0
+  badges: ^1.1.1
   cupertino_icons: ^0.1.3
   google_nav_bar:
     path: ../

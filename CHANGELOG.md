@@ -1,3 +1,7 @@
+## 3.0.0
+
+* Make NavBar great again!
+
 ## 2.2.0
 
 * Added Gradient Tab attributes

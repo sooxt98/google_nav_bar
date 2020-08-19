@@ -1,5 +1,7 @@
 library google_nav_bar;
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 class GNav extends StatefulWidget {
@@ -77,6 +79,7 @@ class _GNavState extends State<GNav> {
                       textStyle: t.textStyle ?? widget.textStyle,
                       text: t.text,
                       icon: t.icon,
+                      leading: t.leading,
                       curve: widget.curve ?? Curves.ease,
                       backgroundGradient:
                           t.backgroundGradient ?? widget.tabBackgroundGradient,
@@ -122,6 +125,7 @@ class GButton extends StatefulWidget {
   final Duration duration;
   final Curve curve;
   final Gradient backgroundGradient;
+  final Widget leading;
 
   GButton({
     Key key,
@@ -140,6 +144,7 @@ class GButton extends StatefulWidget {
     this.curve,
     this.textStyle,
     this.iconSize,
+    this.leading,
     this.onPressed,
     this.backgroundGradient,
   });
@@ -165,9 +170,10 @@ class _GButtonState extends State<GButton> {
       color: widget.backgroundColor,
       gradient: widget.backgroundGradient,
       curve: widget.curve,
-      icon: Icon(widget.icon,
-          color: widget.active ? widget.iconActiveColor : widget.iconColor,
-          size: widget.iconSize),
+      icon: widget.leading ??
+          Icon(widget.icon,
+              color: widget.active ? widget.iconActiveColor : widget.iconColor,
+              size: widget.iconSize),
       text: Text(
         widget.text,
         style: widget.textStyle ??
@@ -257,7 +263,8 @@ class _ButtonState extends State<Button> with TickerProviderStateMixin {
         widget.onPressed();
       },
       child: Container(
-        color: widget.gradient != null ? null : widget.debug ? Colors.red : null,
+        color:
+            widget.gradient != null ? null : widget.debug ? Colors.red : null,
         padding: widget.margin,
         child: AnimatedContainer(
           // padding: EdgeInsets.symmetric(horizontal: 5),
@@ -268,7 +275,9 @@ class _ButtonState extends State<Button> with TickerProviderStateMixin {
                   (widget.duration.inMilliseconds.toInt() / 2).round()),
           decoration: BoxDecoration(
             gradient: widget.gradient,
-            color: _expanded ? widget.color.withOpacity(0) : widget.gradient != null ? Colors.white : widget.color,
+            color: _expanded
+                ? widget.color.withOpacity(0)
+                : widget.gradient != null ? Colors.white : widget.color,
             borderRadius: BorderRadius.all(
               Radius.circular(100),
             ),
@@ -298,12 +307,11 @@ class _ButtonState extends State<Button> with TickerProviderStateMixin {
                         sizeFactor: animation,
                         child: AnimatedOpacity(
                           opacity: _expanded ? 0.0 : 1.0,
-                          curve: _expanded
-                              ? Curves.easeOutQuint
-                              : Curves.easeInQuad,
+                          curve: _expanded ? Curves.easeOut : Curves.easeInQuad,
                           duration: Duration(
                               milliseconds:
-                                  (widget.duration.inMilliseconds.toInt() / 1.5)
+                                  (widget.duration.inMilliseconds.toInt() /
+                                          (_expanded ? 8.5 : 1.5))
                                       .round()),
                           child: Container(
                               margin: EdgeInsets.only(
