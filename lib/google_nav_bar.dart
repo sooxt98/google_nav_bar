@@ -282,7 +282,7 @@ class _ButtonState extends State<Button> with TickerProviderStateMixin {
               Radius.circular(100),
             ),
           ),
-          child: Stack(overflow: Overflow.visible, children: <Widget>[
+          child: Stack(children: <Widget>[
             Row(
               children: <Widget>[
                 Container(
