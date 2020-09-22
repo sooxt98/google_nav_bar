@@ -1,3 +1,7 @@
+## 3.0.1
+
+* Removed unessasary code
+
 ## 3.0.0
 
 * Make NavBar great again!
