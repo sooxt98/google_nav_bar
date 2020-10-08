@@ -1,5 +1,9 @@
 ## 3.0.1
 
+* Added key for testing
+
+## 3.0.1
+
 * Removed unessasary code
 
 ## 3.0.0

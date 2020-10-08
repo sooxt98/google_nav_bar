@@ -1,6 +1,6 @@
 name: google_nav_bar
 description: A modern google style nav bar which could be use as a bottom navigation bar or tabbar, the design strictly follows the cuberto UI/UX on dribbble.
-version: 3.0.1
+version: 3.0.2
 homepage: https://github.com/sooxt98/google_nav_bar
 
 environment:

@@ -23,7 +23,7 @@ class GNav extends StatefulWidget {
     this.debug,
     this.duration,
     this.tabBackgroundGradient,
-  });
+  }) : super(key: key);
 
   final List<GButton> tabs;
   final int selectedIndex;
@@ -147,7 +147,7 @@ class GButton extends StatefulWidget {
     this.leading,
     this.onPressed,
     this.backgroundGradient,
-  });
+  }) : super(key: key);
 
   @override
   _GButtonState createState() => _GButtonState();
