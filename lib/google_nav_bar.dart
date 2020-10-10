@@ -67,6 +67,7 @@ class _GNavState extends State<GNav> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: widget.tabs
                 .map((t) => GButton(
+                      key: t.key,
                       debug: widget.debug ?? false,
                       margin: t.margin ?? widget.tabMargin,
                       active: selectedIndex == widget.tabs.indexOf(t),
