@@ -23,6 +23,7 @@ class GNav extends StatefulWidget {
     this.debug,
     this.duration,
     this.tabBackgroundGradient,
+    this.mainAxisAlignment = MainAxisAlignment.spaceBetween,
   }) : super(key: key);
 
   final List<GButton> tabs;
@@ -41,6 +42,7 @@ class GNav extends StatefulWidget {
   final Curve curve;
   final bool debug;
   final Gradient tabBackgroundGradient;
+  final MainAxisAlignment mainAxisAlignment;
 
   @override
   _GNavState createState() => _GNavState();
@@ -64,10 +66,12 @@ class _GNavState extends State<GNav> {
         // padding: EdgeInsets.all(12),
         // alignment: Alignment.center,
         child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: widget.mainAxisAlignment,
             children: widget.tabs
                 .map((t) => GButton(
                       key: t.key,
+                      borderRadius: t.borderRadius ??
+                          BorderRadius.all(Radius.circular(100.0)),
                       debug: widget.debug ?? false,
                       margin: t.margin ?? widget.tabMargin,
                       active: selectedIndex == widget.tabs.indexOf(t),
@@ -127,6 +131,7 @@ class GButton extends StatefulWidget {
   final Curve curve;
   final Gradient backgroundGradient;
   final Widget leading;
+  final BorderRadius borderRadius;
 
   GButton({
     Key key,
@@ -148,6 +153,7 @@ class GButton extends StatefulWidget {
     this.leading,
     this.onPressed,
     this.backgroundGradient,
+    this.borderRadius,
   }) : super(key: key);
 
   @override
@@ -158,6 +164,7 @@ class _GButtonState extends State<GButton> {
   @override
   Widget build(BuildContext context) {
     return Button(
+      borderRadius: widget.borderRadius,
       debug: widget.debug,
       duration: widget.duration,
       iconSize: widget.iconSize,
@@ -200,6 +207,7 @@ class Button extends StatefulWidget {
     this.active = false,
     this.debug,
     this.gradient,
+    this.borderRadius = const BorderRadius.all(Radius.circular(100.0)),
   }) : super(key: key);
 
   final Widget icon;
@@ -215,6 +223,7 @@ class Button extends StatefulWidget {
   final Duration duration;
   final Curve curve;
   final Gradient gradient;
+  final BorderRadius borderRadius;
 
   @override
   _ButtonState createState() => _ButtonState();
@@ -264,8 +273,11 @@ class _ButtonState extends State<Button> with TickerProviderStateMixin {
         widget.onPressed();
       },
       child: Container(
-        color:
-            widget.gradient != null ? null : widget.debug ? Colors.red : null,
+        color: widget.gradient != null
+            ? null
+            : widget.debug
+                ? Colors.red
+                : null,
         padding: widget.margin,
         child: AnimatedContainer(
           // padding: EdgeInsets.symmetric(horizontal: 5),
@@ -278,10 +290,10 @@ class _ButtonState extends State<Button> with TickerProviderStateMixin {
             gradient: widget.gradient,
             color: _expanded
                 ? widget.color.withOpacity(0)
-                : widget.gradient != null ? Colors.white : widget.color,
-            borderRadius: BorderRadius.all(
-              Radius.circular(100),
-            ),
+                : widget.gradient != null
+                    ? Colors.white
+                    : widget.color,
+            borderRadius: widget.borderRadius,
           ),
           child: Stack(children: <Widget>[
             Row(
