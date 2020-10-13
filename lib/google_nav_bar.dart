@@ -23,6 +23,7 @@ class GNav extends StatefulWidget {
     this.debug,
     this.duration,
     this.tabBackgroundGradient,
+    this.mainAxisAlignment = MainAxisAlignment.spaceBetween,
   }) : super(key: key);
 
   final List<GButton> tabs;
@@ -41,6 +42,7 @@ class GNav extends StatefulWidget {
   final Curve curve;
   final bool debug;
   final Gradient tabBackgroundGradient;
+  final MainAxisAlignment mainAxisAlignment;
 
   @override
   _GNavState createState() => _GNavState();
@@ -64,11 +66,12 @@ class _GNavState extends State<GNav> {
         // padding: EdgeInsets.all(12),
         // alignment: Alignment.center,
         child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: widget.mainAxisAlignment,
             children: widget.tabs
                 .map((t) => GButton(
                       key: t.key,
-                      borderRadius: t.borderRadius ?? BorderRadius.all(Radius.circular(100.0)),
+                      borderRadius: t.borderRadius ??
+                          BorderRadius.all(Radius.circular(100.0)),
                       debug: widget.debug ?? false,
                       margin: t.margin ?? widget.tabMargin,
                       active: selectedIndex == widget.tabs.indexOf(t),
@@ -263,7 +266,7 @@ class _ButtonState extends State<Button> with TickerProviderStateMixin {
       expandController.reverse();
     else
       expandController.forward();
-    
+
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onTap: () {
