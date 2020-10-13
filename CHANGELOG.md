@@ -1,3 +1,7 @@
+## 3.1.0
+
+* Customizable button border radius and navbar flex behaviour
+
 ## 3.0.3
 
 * Added key for testing 2
