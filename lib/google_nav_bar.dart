@@ -1,30 +1,30 @@
 library google_nav_bar;
 
+import 'package:flutter/material.dart';
 import 'dart:async';
 
-import 'package:flutter/material.dart';
-
 class GNav extends StatefulWidget {
-  GNav({
-    Key key,
-    this.tabs,
-    this.selectedIndex = 0,
-    this.onTabChange,
-    this.gap,
-    this.padding,
-    this.activeColor,
-    this.color,
-    this.backgroundColor,
-    this.tabBackgroundColor,
-    this.iconSize,
-    this.textStyle,
-    this.curve,
-    this.tabMargin,
-    this.debug,
-    this.duration,
-    this.tabBackgroundGradient,
-    this.mainAxisAlignment = MainAxisAlignment.spaceBetween,
-  }) : super(key: key);
+  GNav(
+      {Key key,
+      this.tabs,
+      this.selectedIndex = 0,
+      this.onTabChange,
+      this.gap,
+      this.padding,
+      this.activeColor,
+      this.color,
+      this.backgroundColor,
+      this.tabBackgroundColor,
+      this.iconSize,
+      this.textStyle,
+      this.curve,
+      this.tabMargin,
+      this.debug,
+      this.duration,
+      this.tabBackgroundGradient,
+      this.mainAxisAlignment = MainAxisAlignment.spaceBetween,
+      this.isRtl = false})
+      : super(key: key);
 
   final List<GButton> tabs;
   final int selectedIndex;
@@ -43,6 +43,7 @@ class GNav extends StatefulWidget {
   final bool debug;
   final Gradient tabBackgroundGradient;
   final MainAxisAlignment mainAxisAlignment;
+  final bool isRtl;
 
   @override
   _GNavState createState() => _GNavState();
@@ -65,50 +66,56 @@ class _GNavState extends State<GNav> {
         color: widget.backgroundColor ?? Colors.transparent,
         // padding: EdgeInsets.all(12),
         // alignment: Alignment.center,
-        child: Row(
-            mainAxisAlignment: widget.mainAxisAlignment,
-            children: widget.tabs
-                .map((t) => GButton(
-                      key: t.key,
-                      borderRadius: t.borderRadius ??
-                          BorderRadius.all(Radius.circular(100.0)),
-                      debug: widget.debug ?? false,
-                      margin: t.margin ?? widget.tabMargin,
-                      active: selectedIndex == widget.tabs.indexOf(t),
-                      gap: t.gap ?? widget.gap,
-                      iconActiveColor: t.iconActiveColor ?? widget.activeColor,
-                      iconColor: t.iconColor ?? widget.color,
-                      iconSize: t.iconSize ?? widget.iconSize,
-                      textColor: t.textColor ?? widget.activeColor,
-                      padding: t.padding ?? widget.padding,
-                      textStyle: t.textStyle ?? widget.textStyle,
-                      text: t.text,
-                      icon: t.icon,
-                      leading: t.leading,
-                      curve: widget.curve ?? Curves.ease,
-                      backgroundGradient:
-                          t.backgroundGradient ?? widget.tabBackgroundGradient,
-                      backgroundColor: t.backgroundColor ??
-                          widget.tabBackgroundColor ??
-                          Colors.transparent,
-                      duration: widget.duration ?? Duration(milliseconds: 500),
-                      onPressed: () {
-                        if (!clickable) return;
-                        setState(() {
-                          selectedIndex = widget.tabs.indexOf(t);
-                          clickable = false;
-                        });
-                        widget.onTabChange(selectedIndex);
-
-                        Future.delayed(
-                            widget.duration ?? Duration(milliseconds: 500), () {
+        child: Directionality(
+          textDirection: widget.isRtl ? TextDirection.rtl : TextDirection.ltr,
+          child: Row(
+              mainAxisAlignment: widget.mainAxisAlignment,
+              children: widget.tabs
+                  .map((t) => GButton(
+                        key: t.key,
+                        borderRadius: t.borderRadius ??
+                            BorderRadius.all(Radius.circular(100.0)),
+                        debug: widget.debug ?? false,
+                        margin: t.margin ?? widget.tabMargin,
+                        active: selectedIndex == widget.tabs.indexOf(t),
+                        gap: t.gap ?? widget.gap,
+                        iconActiveColor:
+                            t.iconActiveColor ?? widget.activeColor,
+                        iconColor: t.iconColor ?? widget.color,
+                        iconSize: t.iconSize ?? widget.iconSize,
+                        textColor: t.textColor ?? widget.activeColor,
+                        padding: t.padding ?? widget.padding,
+                        textStyle: t.textStyle ?? widget.textStyle,
+                        text: t.text,
+                        icon: t.icon,
+                        leading: t.leading,
+                        curve: widget.curve ?? Curves.ease,
+                        backgroundGradient: t.backgroundGradient ??
+                            widget.tabBackgroundGradient,
+                        backgroundColor: t.backgroundColor ??
+                            widget.tabBackgroundColor ??
+                            Colors.transparent,
+                        duration:
+                            widget.duration ?? Duration(milliseconds: 500),
+                        onPressed: () {
+                          if (!clickable) return;
                           setState(() {
-                            clickable = true;
+                            selectedIndex = widget.tabs.indexOf(t);
+                            clickable = false;
                           });
-                        });
-                      },
-                    ))
-                .toList()));
+                          widget.onTabChange(selectedIndex);
+
+                          Future.delayed(
+                              widget.duration ?? Duration(milliseconds: 500),
+                              () {
+                            setState(() {
+                              clickable = true;
+                            });
+                          });
+                        },
+                      ))
+                  .toList()),
+        ));
   }
 }
 
@@ -267,105 +274,114 @@ class _ButtonState extends State<Button> with TickerProviderStateMixin {
     else
       expandController.forward();
 
-    return GestureDetector(
-      behavior: HitTestBehavior.translucent,
-      onTap: () {
-        widget.onPressed();
-      },
-      child: Container(
-        color:
-            widget.gradient != null ? null : widget.debug ? Colors.red : null,
-        padding: widget.margin,
-        child: AnimatedContainer(
-          // padding: EdgeInsets.symmetric(horizontal: 5),
-          padding: widget.padding,
-          // curve: Curves.easeOutQuad,
-          duration: Duration(
-              milliseconds:
-                  (widget.duration.inMilliseconds.toInt() / 2).round()),
-          decoration: BoxDecoration(
-            gradient: widget.gradient,
-            color: _expanded
-                ? widget.color.withOpacity(0)
-                : widget.gradient != null ? Colors.white : widget.color,
-            borderRadius: widget.borderRadius,
-          ),
-          child: Stack(children: <Widget>[
-            Row(
-              children: <Widget>[
-                Container(
-                  padding: EdgeInsets.symmetric(
-                      vertical: widget.padding.vertical / 2),
-                  child: widget.icon,
-                ),
-              ],
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: GestureDetector(
+        behavior: HitTestBehavior.translucent,
+        onTap: () {
+          widget.onPressed();
+        },
+        child: Container(
+          color: widget.gradient != null
+              ? null
+              : widget.debug
+                  ? Colors.red
+                  : null,
+          padding: widget.margin,
+          child: AnimatedContainer(
+            // padding: EdgeInsets.symmetric(horizontal: 5),
+            padding: widget.padding,
+            // curve: Curves.easeOutQuad,
+            duration: Duration(
+                milliseconds:
+                    (widget.duration.inMilliseconds.toInt() / 2).round()),
+            decoration: BoxDecoration(
+              gradient: widget.gradient,
+              color: _expanded
+                  ? widget.color.withOpacity(0)
+                  : widget.gradient != null
+                      ? Colors.white
+                      : widget.color,
+              borderRadius: widget.borderRadius,
             ),
-            Container(
-              child: Row(
+            child: Stack(children: <Widget>[
+              Row(
                 children: <Widget>[
-                  SizedBox(
-                      height: widget.iconSize + widget.padding.vertical,
-                      width: 0),
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      SizeTransition(
-                        axis: Axis.horizontal,
-                        axisAlignment: 1,
-                        sizeFactor: animation,
-                        child: AnimatedOpacity(
-                          opacity: _expanded ? 0.0 : 1.0,
-                          curve: _expanded ? Curves.easeOut : Curves.easeInQuad,
-                          duration: Duration(
-                              milliseconds:
-                                  (widget.duration.inMilliseconds.toInt() /
-                                          (_expanded ? 8.5 : 1.5))
-                                      .round()),
-                          child: Container(
-                              margin: EdgeInsets.only(
-                                  left: widget.gap + widget.iconSize),
-                              alignment: Alignment.centerRight,
-                              child: widget.text),
-                        ),
-                      ),
-                    ],
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                        vertical: widget.padding.vertical / 2),
+                    child: widget.icon,
                   ),
                 ],
               ),
-            ),
-            Container(
-              child: Row(
-                children: <Widget>[
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          Container(
-                              padding: EdgeInsets.symmetric(
-                                  vertical: widget.padding.vertical / 2),
-                              child: widget.icon),
-                          SizeTransition(
-                            axis: Axis.horizontal,
-                            axisAlignment: 1,
-                            sizeFactor: animation,
-                            child: Opacity(
-                              opacity: 0, // debug use
-                              child: Container(
-                                  color: Colors.red.withOpacity(.2),
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: widget.gap),
-                                  child: widget.text),
-                            ),
+              Container(
+                child: Row(
+                  children: <Widget>[
+                    SizedBox(
+                        height: widget.iconSize + widget.padding.vertical,
+                        width: 0),
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        SizeTransition(
+                          axis: Axis.horizontal,
+                          axisAlignment: 1,
+                          sizeFactor: animation,
+                          child: AnimatedOpacity(
+                            opacity: _expanded ? 0.0 : 1.0,
+                            curve:
+                                _expanded ? Curves.easeOut : Curves.easeInQuad,
+                            duration: Duration(
+                                milliseconds:
+                                    (widget.duration.inMilliseconds.toInt() /
+                                            (_expanded ? 8.5 : 1.5))
+                                        .round()),
+                            child: Container(
+                                margin: EdgeInsets.only(
+                                    left: widget.gap + widget.iconSize),
+                                alignment: Alignment.centerRight,
+                                child: widget.text),
                           ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ]),
+              Container(
+                child: Row(
+                  children: <Widget>[
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Row(
+                          children: <Widget>[
+                            Container(
+                                padding: EdgeInsets.symmetric(
+                                    vertical: widget.padding.vertical / 2),
+                                child: widget.icon),
+                            SizeTransition(
+                              axis: Axis.horizontal,
+                              axisAlignment: 1,
+                              sizeFactor: animation,
+                              child: Opacity(
+                                opacity: 0, // debug use
+                                child: Container(
+                                    color: Colors.red.withOpacity(.2),
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: widget.gap),
+                                    child: widget.text),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ]),
+          ),
         ),
       ),
     );

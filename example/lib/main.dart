@@ -55,6 +55,7 @@ class _ExampleState extends State<Example> {
             padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
             child: GNav(
                 gap: 8,
+                // isRtl: true, by default false
                 activeColor: Colors.white,
                 iconSize: 24,
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
