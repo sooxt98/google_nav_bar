@@ -4,9 +4,6 @@ import 'package:line_icons/line_icons.dart';
 
 void main() => runApp(MaterialApp(
     title: "GNav",
-    builder: (context, child) {
-      return Directionality(textDirection: TextDirection.rtl, child: child);
-    },
     theme: ThemeData(
       primaryColor: Colors.grey[800],
     ),
