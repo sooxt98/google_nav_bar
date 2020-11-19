@@ -273,8 +273,11 @@ class _ButtonState extends State<Button> with TickerProviderStateMixin {
         widget.onPressed();
       },
       child: Container(
-        color:
-            widget.gradient != null ? null : widget.debug ? Colors.red : null,
+        color: widget.gradient != null
+            ? null
+            : widget.debug
+                ? Colors.red
+                : null,
         padding: widget.margin,
         child: AnimatedContainer(
           // padding: EdgeInsets.symmetric(horizontal: 5),
@@ -287,7 +290,9 @@ class _ButtonState extends State<Button> with TickerProviderStateMixin {
             gradient: widget.gradient,
             color: _expanded
                 ? widget.color.withOpacity(0)
-                : widget.gradient != null ? Colors.white : widget.color,
+                : widget.gradient != null
+                    ? Colors.white
+                    : widget.color,
             borderRadius: widget.borderRadius,
           ),
           child: Stack(children: <Widget>[
@@ -322,8 +327,8 @@ class _ButtonState extends State<Button> with TickerProviderStateMixin {
                                           (_expanded ? 8.5 : 1.5))
                                       .round()),
                           child: Container(
-                              margin: EdgeInsets.only(
-                                  left: widget.gap + widget.iconSize),
+                              margin: EdgeInsets.symmetric(
+                                  horizontal: widget.gap + widget.iconSize),
                               alignment: Alignment.centerRight,
                               child: widget.text),
                         ),
