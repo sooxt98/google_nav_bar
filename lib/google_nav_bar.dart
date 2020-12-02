@@ -335,10 +335,8 @@ class _ButtonState extends State<Button> with TickerProviderStateMixin {
                                           (_expanded ? 8.5 : 1.5))
                                       .round()),
                           child: Container(
-                              margin: EdgeInsets.only(
-                                  left: (widget.text.data.isEmpty)
-                                      ? 0
-                                      : widget.gap + widget.iconSize),
+                              margin: EdgeInsets.symmetric(
+                                  horizontal: (widget.text.data.isEmpty) ? 0 : widget.gap + widget.iconSize),
                               alignment: Alignment.centerRight,
                               child: widget.text),
                         ),
