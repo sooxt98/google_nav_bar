@@ -5,7 +5,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 class GNav extends StatefulWidget {
-  GNav({
+  const GNav({
     Key key,
     this.tabs,
     this.selectedIndex = 0,
@@ -71,7 +71,7 @@ class _GNavState extends State<GNav> {
                 .map((t) => GButton(
                       key: t.key,
                       borderRadius: t.borderRadius ??
-                          BorderRadius.all(Radius.circular(100.0)),
+                          const BorderRadius.all(Radius.circular(100.0)),
                       debug: widget.debug ?? false,
                       margin: t.margin ?? widget.tabMargin,
                       active: selectedIndex == widget.tabs.indexOf(t),
@@ -91,7 +91,8 @@ class _GNavState extends State<GNav> {
                       backgroundColor: t.backgroundColor ??
                           widget.tabBackgroundColor ??
                           Colors.transparent,
-                      duration: widget.duration ?? Duration(milliseconds: 500),
+                      duration:
+                          widget.duration ?? const Duration(milliseconds: 500),
                       onPressed: () {
                         if (!clickable) return;
                         setState(() {
@@ -101,7 +102,8 @@ class _GNavState extends State<GNav> {
                         widget.onTabChange(selectedIndex);
 
                         Future.delayed(
-                            widget.duration ?? Duration(milliseconds: 500), () {
+                            widget.duration ??
+                                const Duration(milliseconds: 500), () {
                           setState(() {
                             clickable = true;
                           });
@@ -132,15 +134,16 @@ class GButton extends StatefulWidget {
   final Gradient backgroundGradient;
   final Widget leading;
   final BorderRadius borderRadius;
+  final String semanticLabel;
 
-  GButton({
+  const GButton({
     Key key,
     this.active,
     this.backgroundColor,
     this.icon,
     this.iconColor,
     this.iconActiveColor,
-    this.text,
+    this.text = '',
     this.textColor,
     this.padding,
     this.margin,
@@ -154,6 +157,7 @@ class GButton extends StatefulWidget {
     this.onPressed,
     this.backgroundGradient,
     this.borderRadius,
+    this.semanticLabel,
   }) : super(key: key);
 
   @override
@@ -163,36 +167,40 @@ class GButton extends StatefulWidget {
 class _GButtonState extends State<GButton> {
   @override
   Widget build(BuildContext context) {
-    return Button(
-      borderRadius: widget.borderRadius,
-      debug: widget.debug,
-      duration: widget.duration,
-      iconSize: widget.iconSize,
-      active: widget.active,
-      onPressed: () {
-        widget.onPressed();
-      },
-      padding: widget.padding,
-      margin: widget.margin,
-      gap: widget.gap,
-      color: widget.backgroundColor,
-      gradient: widget.backgroundGradient,
-      curve: widget.curve,
-      icon: widget.leading ??
-          Icon(widget.icon,
-              color: widget.active ? widget.iconActiveColor : widget.iconColor,
-              size: widget.iconSize),
-      text: Text(
-        widget.text,
-        style: widget.textStyle ??
-            TextStyle(fontWeight: FontWeight.w600, color: widget.textColor),
+    return Semantics(
+      label: widget.semanticLabel ?? widget.text,
+      child: Button(
+        borderRadius: widget.borderRadius,
+        debug: widget.debug,
+        duration: widget.duration,
+        iconSize: widget.iconSize,
+        active: widget.active,
+        onPressed: () {
+          widget.onPressed();
+        },
+        padding: widget.padding,
+        margin: widget.margin,
+        gap: widget.gap,
+        color: widget.backgroundColor,
+        gradient: widget.backgroundGradient,
+        curve: widget.curve,
+        icon: widget.leading ??
+            Icon(widget.icon,
+                color:
+                    widget.active ? widget.iconActiveColor : widget.iconColor,
+                size: widget.iconSize),
+        text: Text(
+          widget.text,
+          style: widget.textStyle ??
+              TextStyle(fontWeight: FontWeight.w600, color: widget.textColor),
+        ),
       ),
     );
   }
 }
 
 class Button extends StatefulWidget {
-  Button({
+  const Button({
     Key key,
     this.icon,
     this.iconSize,
@@ -212,7 +220,7 @@ class Button extends StatefulWidget {
 
   final Widget icon;
   final double iconSize;
-  final Widget text;
+  final Text text;
   final Color color;
   final double gap;
   final bool active;
@@ -305,7 +313,7 @@ class _ButtonState extends State<Button> with TickerProviderStateMixin {
                 ),
               ],
             ),
-            Container(
+            SizedBox(
               child: Row(
                 children: <Widget>[
                   SizedBox(
@@ -328,7 +336,7 @@ class _ButtonState extends State<Button> with TickerProviderStateMixin {
                                       .round()),
                           child: Container(
                               margin: EdgeInsets.symmetric(
-                                  horizontal: widget.gap + widget.iconSize),
+                                  horizontal: (widget.text.data.isEmpty) ? 0 : widget.gap + widget.iconSize),
                               alignment: Alignment.centerRight,
                               child: widget.text),
                         ),
@@ -338,7 +346,7 @@ class _ButtonState extends State<Button> with TickerProviderStateMixin {
                 ],
               ),
             ),
-            Container(
+            SizedBox(
               child: Row(
                 children: <Widget>[
                   Column(
@@ -359,7 +367,9 @@ class _ButtonState extends State<Button> with TickerProviderStateMixin {
                               child: Container(
                                   color: Colors.red.withOpacity(.2),
                                   padding: EdgeInsets.symmetric(
-                                      horizontal: widget.gap),
+                                      horizontal: (widget.text.data.isEmpty)
+                                          ? 0
+                                          : widget.gap),
                                   child: widget.text),
                             ),
                           ),
