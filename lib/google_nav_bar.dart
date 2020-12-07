@@ -318,7 +318,7 @@ class _ButtonState extends State<Button> with TickerProviderStateMixin {
                 children: <Widget>[
                   SizedBox(
                       height: widget.iconSize + widget.padding.vertical,
-                      width: 0),
+                      width: widget.iconSize ?? 0),
                   Column(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
