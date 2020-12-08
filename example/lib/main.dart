@@ -3,6 +3,9 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 
 void main() => runApp(MaterialApp(
+    builder: (context, child) {
+      return Directionality(textDirection: TextDirection.ltr, child: child);
+    },
     title: "GNav",
     theme: ThemeData(
       primaryColor: Colors.grey[800],

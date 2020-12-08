@@ -269,6 +269,9 @@ class _ButtonState extends State<Button> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    TextDirection currentDirection = Directionality.of(context);
+    double computePaddingForIcon = ((widget.text.data.isEmpty) ? 0 : widget.gap + widget.iconSize);
+
     _expanded = !widget.active;
     if (_expanded)
       expandController.reverse();
@@ -335,8 +338,10 @@ class _ButtonState extends State<Button> with TickerProviderStateMixin {
                                           (_expanded ? 8.5 : 1.5))
                                       .round()),
                           child: Container(
-                              margin: EdgeInsets.symmetric(
-                                  horizontal: (widget.text.data.isEmpty) ? 0 : widget.gap + widget.iconSize),
+                              margin: EdgeInsets.only(
+                                  right: currentDirection == TextDirection.rtl ? computePaddingForIcon : 0,
+                                  left: currentDirection == TextDirection.ltr ? computePaddingForIcon : 0
+                                  ),
                               alignment: Alignment.centerRight,
                               child: widget.text),
                         ),
