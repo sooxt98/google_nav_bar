@@ -81,6 +81,14 @@ class _TabPageState extends State<TabPage> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 3.0, vertical: 3),
               child: GNav(
+                  tabShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: Offset(0, 3), // changes position of shadow
+                    ),
+                  ],
                   curve: Curves.easeOutExpo,
                   duration: Duration(milliseconds: 900),
                   tabs: [

@@ -22,6 +22,8 @@ class GNav extends StatefulWidget {
     this.tabMargin,
     this.debug,
     this.duration,
+    this.tabBorder,
+    this.tabShadow,
     this.tabBackgroundGradient,
     this.mainAxisAlignment = MainAxisAlignment.spaceBetween,
   }) : super(key: key);
@@ -41,6 +43,8 @@ class GNav extends StatefulWidget {
   final Duration duration;
   final Curve curve;
   final bool debug;
+  final Border tabBorder;
+  final List<BoxShadow> tabShadow;
   final Gradient tabBackgroundGradient;
   final MainAxisAlignment mainAxisAlignment;
 
@@ -70,6 +74,8 @@ class _GNavState extends State<GNav> {
             children: widget.tabs
                 .map((t) => GButton(
                       key: t.key,
+                      border: t.border ?? widget.tabBorder,
+                      shadow: t.shadow ?? widget.tabShadow,
                       borderRadius: t.borderRadius ??
                           const BorderRadius.all(Radius.circular(100.0)),
                       debug: widget.debug ?? false,
@@ -134,6 +140,8 @@ class GButton extends StatefulWidget {
   final Gradient backgroundGradient;
   final Widget leading;
   final BorderRadius borderRadius;
+  final Border border;
+  final List<BoxShadow> shadow;
   final String semanticLabel;
 
   const GButton({
@@ -157,6 +165,8 @@ class GButton extends StatefulWidget {
     this.onPressed,
     this.backgroundGradient,
     this.borderRadius,
+    this.border,
+    this.shadow,
     this.semanticLabel,
   }) : super(key: key);
 
@@ -171,6 +181,8 @@ class _GButtonState extends State<GButton> {
       label: widget.semanticLabel ?? widget.text,
       child: Button(
         borderRadius: widget.borderRadius,
+        border: widget.border,
+        shadow: widget.shadow,
         debug: widget.debug,
         duration: widget.duration,
         iconSize: widget.iconSize,
@@ -200,23 +212,25 @@ class _GButtonState extends State<GButton> {
 }
 
 class Button extends StatefulWidget {
-  const Button({
-    Key key,
-    this.icon,
-    this.iconSize,
-    this.text,
-    this.gap = 0,
-    this.color,
-    this.onPressed,
-    this.duration,
-    this.curve,
-    this.padding = const EdgeInsets.all(25),
-    this.margin = const EdgeInsets.all(0),
-    this.active = false,
-    this.debug,
-    this.gradient,
-    this.borderRadius = const BorderRadius.all(Radius.circular(100.0)),
-  }) : super(key: key);
+  const Button(
+      {Key key,
+      this.icon,
+      this.iconSize,
+      this.text,
+      this.gap = 0,
+      this.color,
+      this.onPressed,
+      this.duration,
+      this.curve,
+      this.padding = const EdgeInsets.all(25),
+      this.margin = const EdgeInsets.all(0),
+      this.active = false,
+      this.debug,
+      this.gradient,
+      this.borderRadius = const BorderRadius.all(Radius.circular(100.0)),
+      this.border,
+      this.shadow})
+      : super(key: key);
 
   final Widget icon;
   final double iconSize;
@@ -232,6 +246,8 @@ class Button extends StatefulWidget {
   final Curve curve;
   final Gradient gradient;
   final BorderRadius borderRadius;
+  final Border border;
+  final List<BoxShadow> shadow;
 
   @override
   _ButtonState createState() => _ButtonState();
@@ -270,7 +286,8 @@ class _ButtonState extends State<Button> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     TextDirection currentDirection = Directionality.of(context);
-    double computePaddingForIcon = ((widget.text.data.isEmpty) ? 0 : widget.gap + widget.iconSize);
+    double computePaddingForIcon =
+        ((widget.text.data.isEmpty) ? 0 : widget.gap + widget.iconSize);
 
     _expanded = !widget.active;
     if (_expanded)
@@ -284,11 +301,6 @@ class _ButtonState extends State<Button> with TickerProviderStateMixin {
         widget.onPressed();
       },
       child: Container(
-        color: widget.gradient != null
-            ? null
-            : widget.debug
-                ? Colors.red
-                : null,
         padding: widget.margin,
         child: AnimatedContainer(
           // padding: EdgeInsets.symmetric(horizontal: 5),
@@ -298,12 +310,16 @@ class _ButtonState extends State<Button> with TickerProviderStateMixin {
               milliseconds:
                   (widget.duration.inMilliseconds.toInt() / 2).round()),
           decoration: BoxDecoration(
+            boxShadow: widget.shadow,
+            border: widget.border,
             gradient: widget.gradient,
             color: _expanded
                 ? widget.color.withOpacity(0)
-                : widget.gradient != null
-                    ? Colors.white
-                    : widget.color,
+                : widget.debug
+                    ? Colors.red
+                    : widget.gradient != null
+                        ? Colors.white
+                        : widget.color,
             borderRadius: widget.borderRadius,
           ),
           child: Stack(children: <Widget>[
@@ -339,9 +355,12 @@ class _ButtonState extends State<Button> with TickerProviderStateMixin {
                                       .round()),
                           child: Container(
                               margin: EdgeInsets.only(
-                                  right: currentDirection == TextDirection.rtl ? computePaddingForIcon : 0,
-                                  left: currentDirection == TextDirection.ltr ? computePaddingForIcon : 0
-                                  ),
+                                  right: currentDirection == TextDirection.rtl
+                                      ? computePaddingForIcon
+                                      : 0,
+                                  left: currentDirection == TextDirection.ltr
+                                      ? computePaddingForIcon
+                                      : 0),
                               alignment: Alignment.centerRight,
                               child: widget.text),
                         ),

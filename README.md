@@ -17,7 +17,7 @@ Add this to your package's `pubspec.yaml` file:
 ```
 ...
 dependencies:
-  google_nav_bar: ^3.1.0
+  google_nav_bar: ^3.2.0
   
 ```
 
@@ -28,4 +28,41 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 
 ## Usage
 
+Style your tab globally with GNav's attribute, if you wish to style tab separately, use GButton's attribute
+
+``` dart
+GNav(
+  tabBorder: Border.all(color: Colors.black, width: 1), // tab button border
+  tabShadow: [BoxShadow(color: Colors.grey.withOpacity(0.5), blurRadius: 8)], // tab button shadow
+  curve: Curves.easeOutExpo, // tab animation curves
+  duration: Duration(milliseconds: 900), // tab animation duration
+  gap: 8, // the tab button gap between icon and text 
+  color: Colors.grey[800], // unselected icon color
+  activeColor: Colors.purple, // selected icon and text color
+  iconSize: 24, // tab button icon size
+  tabBackgroundColor: Colors.purple.withOpacity(0.1), // selected tab background color
+  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5), // navigation bar padding
+  tabs: [
+    GButton(
+      icon: LineIcons.home,
+      text: 'Home',
+    ),
+    GButton(
+      icon: LineIcons.heart_o,
+      text: 'Likes',
+    ),
+    GButton(
+      icon: LineIcons.search,
+      text: 'Search',
+    ),
+    GButton(
+      icon: LineIcons.user,
+      text: 'Profile',
+    )
+  ]
+)
+```
+
 View the example folder
+
+There are 4 different use case included in the /example directory, go try it out!

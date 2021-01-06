@@ -1,6 +1,12 @@
+## 3.2.0
+
+* Added customizable button border style and shadow
+* Added navbar RTL support (thanks to hennonoman)
+* Added semantic label (thanks to tsinis)
+
 ## 3.1.0
 
-* Customizable button border radius and navbar flex behaviour
+* Added customizable button border radius and navbar flex behaviour
 
 ## 3.0.3
 
