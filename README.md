@@ -17,7 +17,7 @@ Add this to your package's `pubspec.yaml` file:
 ```
 ...
 dependencies:
-  google_nav_bar: ^4.0.1
+  google_nav_bar: ^4.0.2
   
 ```
 
@@ -32,6 +32,9 @@ Style your tab globally with GNav's attribute, if you wish to style tab separate
 
 ``` dart
 GNav(
+  rippleColor: Colors.grey[800], // tab button ripple color when pressed
+  hoverColor: Colors.grey[700], // tab button hover color
+  haptic: true, // haptic feedback
   tabBorderRadius: 15, 
   tabActiveBorder: Border.all(color: Colors.black, width: 1), // tab button border
   tabBorder: Border.all(color: Colors.grey, width: 1), // tab button border
