@@ -15,7 +15,7 @@ class TabPage extends StatefulWidget {
 class _TabPageState extends State<TabPage> {
   int selectedIndex = 0;
   int badge = 0;
-  var padding = EdgeInsets.symmetric(horizontal: 18, vertical: 5);
+  var padding = EdgeInsets.symmetric(horizontal: 18, vertical: 12);
   double gap = 10;
 
   PageController controller = PageController();
@@ -31,7 +31,7 @@ class _TabPageState extends State<TabPage> {
   void initState() {
     super.initState();
 
-    var padding = EdgeInsets.symmetric(horizontal: 18, vertical: 5);
+    // var padding = EdgeInsets.symmetric(horizontal: 18, vertical: 5);
     double gap = 10;
   }
 
@@ -81,8 +81,8 @@ class _TabPageState extends State<TabPage> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 3.0, vertical: 3),
               child: GNav(
-                  curve: Curves.easeOutExpo,
-                  duration: Duration(milliseconds: 900),
+                  // curve: Curves.easeOutExpo,
+                  // duration: Duration(milliseconds: 900),
                   tabs: [
                     GButton(
                       gap: gap,

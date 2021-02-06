@@ -69,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     activeColor: Colors.purple,
                     iconSize: 24,
                     tabBackgroundColor: Colors.purple.withOpacity(0.1),
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
                     duration: Duration(milliseconds: 1000),
                     tabs: [
                       GButton(

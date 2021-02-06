@@ -1,3 +1,7 @@
+## 4.0.0
+* Reworked animations
+* Customizable border
+
 ## 3.2.0
 
 * Added customizable button border style and shadow

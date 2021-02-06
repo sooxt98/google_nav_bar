@@ -1,8 +1,9 @@
 library google_nav_bar;
 
 import 'dart:async';
-
+import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class GNav extends StatefulWidget {
   const GNav({
@@ -14,8 +15,11 @@ class GNav extends StatefulWidget {
     this.padding,
     this.activeColor,
     this.color,
+    this.rippleColor,
+    this.hoverColor,
     this.backgroundColor,
     this.tabBackgroundColor,
+    this.tabBorderRadius,
     this.iconSize,
     this.textStyle,
     this.curve,
@@ -23,7 +27,9 @@ class GNav extends StatefulWidget {
     this.debug,
     this.duration,
     this.tabBorder,
+    this.tabActiveBorder,
     this.tabShadow,
+    this.haptic,
     this.tabBackgroundGradient,
     this.mainAxisAlignment = MainAxisAlignment.spaceBetween,
   }) : super(key: key);
@@ -32,18 +38,23 @@ class GNav extends StatefulWidget {
   final int selectedIndex;
   final Function onTabChange;
   final double gap;
+  final double tabBorderRadius;
   final double iconSize;
   final Color activeColor;
   final Color backgroundColor;
   final Color tabBackgroundColor;
   final Color color;
+  final Color rippleColor;
+  final Color hoverColor;
   final EdgeInsetsGeometry padding;
   final EdgeInsetsGeometry tabMargin;
   final TextStyle textStyle;
   final Duration duration;
   final Curve curve;
   final bool debug;
+  final bool haptic;
   final Border tabBorder;
+  final Border tabActiveBorder;
   final List<BoxShadow> tabShadow;
   final Gradient tabBackgroundGradient;
   final MainAxisAlignment mainAxisAlignment;
@@ -75,9 +86,13 @@ class _GNavState extends State<GNav> {
                 .map((t) => GButton(
                       key: t.key,
                       border: t.border ?? widget.tabBorder,
+                      activeBorder: t.activeBorder ?? widget.tabActiveBorder,
                       shadow: t.shadow ?? widget.tabShadow,
-                      borderRadius: t.borderRadius ??
-                          const BorderRadius.all(Radius.circular(100.0)),
+                      borderRadius:
+                          t.borderRadius ?? widget.tabBorderRadius != null
+                              ? BorderRadius.all(
+                                  Radius.circular(widget.tabBorderRadius))
+                              : const BorderRadius.all(Radius.circular(100.0)),
                       debug: widget.debug ?? false,
                       margin: t.margin ?? widget.tabMargin,
                       active: selectedIndex == widget.tabs.indexOf(t),
@@ -86,12 +101,19 @@ class _GNavState extends State<GNav> {
                       iconColor: t.iconColor ?? widget.color,
                       iconSize: t.iconSize ?? widget.iconSize,
                       textColor: t.textColor ?? widget.activeColor,
+                      rippleColor: t.rippleColor ??
+                          widget.rippleColor ??
+                          Colors.transparent,
+                      hoverColor: t.hoverColor ??
+                          widget.hoverColor ??
+                          Colors.transparent,
                       padding: t.padding ?? widget.padding,
                       textStyle: t.textStyle ?? widget.textStyle,
                       text: t.text,
                       icon: t.icon,
+                      haptic: widget.haptic ?? true,
                       leading: t.leading,
-                      curve: widget.curve ?? Curves.ease,
+                      curve: widget.curve ?? Curves.easeInCubic,
                       backgroundGradient:
                           t.backgroundGradient ?? widget.tabBackgroundGradient,
                       backgroundColor: t.backgroundColor ??
@@ -123,8 +145,11 @@ class _GNavState extends State<GNav> {
 class GButton extends StatefulWidget {
   final bool active;
   final bool debug;
+  final bool haptic;
   final double gap;
   final Color iconColor;
+  final Color rippleColor;
+  final Color hoverColor;
   final Color iconActiveColor;
   final Color textColor;
   final EdgeInsetsGeometry padding;
@@ -141,15 +166,19 @@ class GButton extends StatefulWidget {
   final Widget leading;
   final BorderRadius borderRadius;
   final Border border;
+  final Border activeBorder;
   final List<BoxShadow> shadow;
   final String semanticLabel;
 
   const GButton({
     Key key,
     this.active,
+    this.haptic,
     this.backgroundColor,
     this.icon,
     this.iconColor,
+    this.rippleColor,
+    this.hoverColor,
     this.iconActiveColor,
     this.text = '',
     this.textColor,
@@ -166,6 +195,7 @@ class GButton extends StatefulWidget {
     this.backgroundGradient,
     this.borderRadius,
     this.border,
+    this.activeBorder,
     this.shadow,
     this.semanticLabel,
   }) : super(key: key);
@@ -182,25 +212,28 @@ class _GButtonState extends State<GButton> {
       child: Button(
         borderRadius: widget.borderRadius,
         border: widget.border,
+        activeBorder: widget.activeBorder,
         shadow: widget.shadow,
         debug: widget.debug,
         duration: widget.duration,
         iconSize: widget.iconSize,
         active: widget.active,
         onPressed: () {
+          if (widget.haptic) HapticFeedback.selectionClick();
           widget.onPressed();
         },
         padding: widget.padding,
         margin: widget.margin,
         gap: widget.gap,
         color: widget.backgroundColor,
+        rippleColor: widget.rippleColor,
+        hoverColor: widget.hoverColor,
         gradient: widget.backgroundGradient,
         curve: widget.curve,
-        icon: widget.leading ??
-            Icon(widget.icon,
-                color:
-                    widget.active ? widget.iconActiveColor : widget.iconColor,
-                size: widget.iconSize),
+        leading: widget.leading,
+        iconActiveColor: widget.iconActiveColor,
+        iconColor: widget.iconColor,
+        icon: widget.icon,
         text: Text(
           widget.text,
           style: widget.textStyle ??
@@ -216,9 +249,14 @@ class Button extends StatefulWidget {
       {Key key,
       this.icon,
       this.iconSize,
+      this.leading,
+      this.iconActiveColor,
+      this.iconColor,
       this.text,
       this.gap = 0,
       this.color,
+      this.rippleColor,
+      this.hoverColor,
       this.onPressed,
       this.duration,
       this.curve,
@@ -229,13 +267,19 @@ class Button extends StatefulWidget {
       this.gradient,
       this.borderRadius = const BorderRadius.all(Radius.circular(100.0)),
       this.border,
+      this.activeBorder,
       this.shadow})
       : super(key: key);
 
-  final Widget icon;
+  final IconData icon;
   final double iconSize;
   final Text text;
+  final Widget leading;
+  final Color iconActiveColor;
+  final Color iconColor;
   final Color color;
+  final Color rippleColor;
+  final Color hoverColor;
   final double gap;
   final bool active;
   final bool debug;
@@ -247,6 +291,7 @@ class Button extends StatefulWidget {
   final Gradient gradient;
   final BorderRadius borderRadius;
   final Border border;
+  final Border activeBorder;
   final List<BoxShadow> shadow;
 
   @override
@@ -265,15 +310,8 @@ class _ButtonState extends State<Button> with TickerProviderStateMixin {
     _expanded = widget.active;
 
     expandController =
-        AnimationController(vsync: this, duration: widget.duration);
-    animation = CurvedAnimation(
-        parent: expandController,
-        curve: widget.curve,
-        reverseCurve: widget.curve.flipped
-        // curve: Cubic(0.25, 1.03, 0.31, 0.92),
-        // reverseCurve: Cubic(0.77, 0.67, 0, 10).flipped
-
-        );
+        AnimationController(vsync: this, duration: widget.duration)
+          ..addListener(() => setState(() {}));
   }
 
   @override
@@ -285,9 +323,15 @@ class _ButtonState extends State<Button> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    TextDirection currentDirection = Directionality.of(context);
-    double computePaddingForIcon =
-        ((widget.text.data.isEmpty) ? 0 : widget.gap + widget.iconSize);
+    var curveValue = expandController
+        .drive(
+            CurveTween(curve: _expanded ? widget.curve : widget.curve.flipped))
+        .value;
+    var _colorTween =
+        ColorTween(begin: widget.iconColor, end: widget.iconActiveColor);
+    var _colorTweenAnimation = _colorTween.animate(CurvedAnimation(
+        parent: expandController,
+        curve: _expanded ? Curves.easeInExpo : Curves.easeOutCirc));
 
     _expanded = !widget.active;
     if (_expanded)
@@ -295,116 +339,95 @@ class _ButtonState extends State<Button> with TickerProviderStateMixin {
     else
       expandController.forward();
 
-    return GestureDetector(
-      behavior: HitTestBehavior.translucent,
-      onTap: () {
-        widget.onPressed();
-      },
-      child: Container(
-        padding: widget.margin,
-        child: AnimatedContainer(
-          // padding: EdgeInsets.symmetric(horizontal: 5),
-          padding: widget.padding,
-          // curve: Curves.easeOutQuad,
-          duration: Duration(
-              milliseconds:
-                  (widget.duration.inMilliseconds.toInt() / 2).round()),
-          decoration: BoxDecoration(
-            boxShadow: widget.shadow,
-            border: widget.border,
-            gradient: widget.gradient,
-            color: _expanded
-                ? widget.color.withOpacity(0)
-                : widget.debug
-                    ? Colors.red
-                    : widget.gradient != null
-                        ? Colors.white
-                        : widget.color,
-            borderRadius: widget.borderRadius,
-          ),
-          child: Stack(children: <Widget>[
-            Row(
-              children: <Widget>[
-                Container(
-                  padding: EdgeInsets.symmetric(
-                      vertical: widget.padding.vertical / 2),
-                  child: widget.icon,
-                ),
-              ],
+    Widget icon = widget.leading ??
+        Icon(widget.icon,
+            color: _colorTweenAnimation.value, size: widget.iconSize);
+
+    return Material(
+      type: MaterialType.transparency,
+      child: InkWell(
+        highlightColor: widget.hoverColor,
+        splashColor: widget.rippleColor,
+        borderRadius: BorderRadius.circular(100),
+        // behavior: HitTestBehavior.translucent,
+        onTap: () {
+          widget.onPressed();
+        },
+        child: Container(
+          padding: widget.margin,
+          child: AnimatedContainer(
+            curve: Curves.easeOut,
+            // padding: EdgeInsets.symmetric(horizontal: 5),
+            padding: widget.padding,
+            // curve: Curves.easeOutQuad,
+            duration: widget.duration,
+            // curve: !_expanded ? widget.curve : widget.curve.flipped,
+            decoration: BoxDecoration(
+              boxShadow: widget.shadow,
+              border: widget.active
+                  ? (widget.activeBorder ?? widget.border)
+                  : widget.border,
+              gradient: widget.gradient,
+              color: _expanded
+                  ? widget.color.withOpacity(0)
+                  : widget.debug
+                      ? Colors.red
+                      : widget.gradient != null
+                          ? Colors.white
+                          : widget.color,
+              borderRadius: widget.borderRadius,
             ),
-            SizedBox(
-              child: Row(
-                children: <Widget>[
-                  SizedBox(
-                      height: widget.iconSize + widget.padding.vertical,
-                      width: 0),
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      SizeTransition(
-                        axis: Axis.horizontal,
-                        axisAlignment: 1,
-                        sizeFactor: animation,
-                        child: AnimatedOpacity(
-                          opacity: _expanded ? 0.0 : 1.0,
-                          curve: _expanded ? Curves.easeOut : Curves.easeInQuad,
-                          duration: Duration(
-                              milliseconds:
-                                  (widget.duration.inMilliseconds.toInt() /
-                                          (_expanded ? 8.5 : 1.5))
-                                      .round()),
+            child: FittedBox(
+              fit: BoxFit.fitHeight,
+              child: Stack(children: [
+                Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                  Opacity(
+                    opacity: 0,
+                    child: icon,
+                  ),
+                  Container(
+//               width: double.infinity,
+
+                    child: Container(
+                      //color: Colors.blue.withOpacity(.2),
+                      child: Align(
+                          alignment: Alignment.centerRight,
+                          widthFactor: curveValue,
                           child: Container(
-                              margin: EdgeInsets.only(
-                                  right: currentDirection == TextDirection.rtl
-                                      ? computePaddingForIcon
-                                      : 0,
-                                  left: currentDirection == TextDirection.ltr
-                                      ? computePaddingForIcon
-                                      : 0),
-                              alignment: Alignment.centerRight,
-                              child: widget.text),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              child: Row(
-                children: <Widget>[
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          Container(
-                              padding: EdgeInsets.symmetric(
-                                  vertical: widget.padding.vertical / 2),
-                              child: widget.icon),
-                          SizeTransition(
-                            axis: Axis.horizontal,
-                            axisAlignment: 1,
-                            sizeFactor: animation,
+                            //width: 100,
+                            //color: Colors.red.withOpacity(.2),
                             child: Opacity(
-                              opacity: 0, // debug use
-                              child: Container(
-                                  color: Colors.red.withOpacity(.2),
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: (widget.text.data.isEmpty)
-                                          ? 0
-                                          : widget.gap),
-                                  child: widget.text),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+                                opacity: _expanded
+                                    ? pow(expandController.value, 13)
+                                    : expandController
+                                        .drive(CurveTween(curve: Curves.easeIn))
+                                        .value,
+                                //width: 100,
+                                child: Padding(
+                                  padding: EdgeInsets.only(
+                                      left: widget.gap +
+                                          8 -
+                                          (8 *
+                                              expandController
+                                                  .drive(CurveTween(
+                                                      curve:
+                                                          Curves.easeOutSine))
+                                                  .value),
+                                      right: 8 *
+                                          expandController
+                                              .drive(CurveTween(
+                                                  curve: Curves.easeOutSine))
+                                              .value),
+                                  child: widget.text,
+                                )),
+                          )),
+                    ),
                   ),
-                ],
-              ),
+                ]),
+                Align(alignment: Alignment.centerLeft, child: icon),
+              ]),
             ),
-          ]),
+          ),
         ),
       ),
     );
