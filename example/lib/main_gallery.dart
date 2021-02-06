@@ -245,6 +245,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     padding: const EdgeInsets.symmetric(
                         horizontal: 16.0, vertical: 22),
                     child: GNav(
+                        tabBackgroundGradient: LinearGradient(
+                            begin: Alignment.topRight,
+                            end: Alignment.bottomLeft,
+                            colors: [Colors.lightBlue[100], Colors.cyan]),
                         gap: 8,
                         tabBorderRadius: 15,
                         color: Colors.grey[600],

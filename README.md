@@ -5,9 +5,7 @@
 
 A modern google style nav bar for flutter.
 
-![demo](https://user-images.githubusercontent.com/13378059/90664650-7df1a800-e27d-11ea-8c41-0fd79bc8de07.gif)
-
-![google_nav_bar](https://user-images.githubusercontent.com/13378059/107119103-f0038b00-68b7-11eb-980a-66880c7d8c36.gif)
+![google_nav_bar](https://user-images.githubusercontent.com/13378059/107119496-8cc72800-68ba-11eb-96c6-9bc8efe1a898.gif)
 
 
 GoogleNavBar is a Flutter widget designed by [Aurelien Salomon](https://dribbble.com/shots/5925052-Google-Bottom-Bar-Navigation-Pattern/) and developed by [sooxt98](https://www.instagram.com/sooxt98/).
