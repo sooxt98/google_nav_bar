@@ -348,7 +348,7 @@ class _ButtonState extends State<Button> with TickerProviderStateMixin {
       child: InkWell(
         highlightColor: widget.hoverColor,
         splashColor: widget.rippleColor,
-        borderRadius: BorderRadius.circular(100),
+        borderRadius: widget.borderRadius,
         // behavior: HitTestBehavior.translucent,
         onTap: () {
           widget.onPressed();
