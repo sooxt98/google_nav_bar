@@ -57,7 +57,7 @@ class Button extends StatefulWidget {
 }
 
 class _ButtonState extends State<Button> with TickerProviderStateMixin {
-  late final bool _expanded;
+  late bool _expanded;
   late final AnimationController expandController;
 
   @override
