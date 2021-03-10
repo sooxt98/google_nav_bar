@@ -1,3 +1,6 @@
+## 5.0.0
+* Null safety migration (thanks to Ascenio)
+
 ## 4.0.1
 * Reworked animations
 * Customizable border
