@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
@@ -32,7 +30,6 @@ class _TabPageState extends State<TabPage> {
     super.initState();
 
     // var padding = EdgeInsets.symmetric(horizontal: 18, vertical: 5);
-    double gap = 10;
   }
 
   @override

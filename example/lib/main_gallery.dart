@@ -31,7 +31,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int selectedIndex = 0;
   int badge = 0;
 
-  List<GButton> tabs = new List();
+  List<GButton> tabs = [];
   List<Color> colors = [
     Colors.purple,
     Colors.pink,

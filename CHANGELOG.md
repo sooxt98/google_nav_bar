@@ -1,5 +1,6 @@
-## 5.0.0
+## 5.0.1
 * Null safety migration (thanks to Ascenio)
+* Excluded example folder for publishing
 
 ## 4.0.1
 * Reworked animations
