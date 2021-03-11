@@ -1,3 +1,6 @@
+## 5.0.2
+* Use didUpdateWidget to set selectedIndex when rebuilding (thanks to JagandeepBrar)
+
 ## 5.0.1
 * Null safety migration (thanks to Ascenio)
 * Excluded example folder for publishing
