@@ -71,6 +71,12 @@ class _GNavState extends State<GNav> {
   }
 
   @override
+  void didUpdateWidget(GNav oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if(widget.selectedIndex != oldWidget.selectedIndex) selectedIndex = widget.selectedIndex;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
         color: widget.backgroundColor,
