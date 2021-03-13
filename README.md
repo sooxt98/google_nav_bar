@@ -17,7 +17,7 @@ Add this to your package's `pubspec.yaml` file:
 ```
 ...
 dependencies:
-  google_nav_bar: ^5.0.2
+  google_nav_bar: ^5.0.3
   
 ```
 
