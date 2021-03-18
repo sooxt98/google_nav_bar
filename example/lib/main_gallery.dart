@@ -19,9 +19,9 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  const MyHomePage({Key? key, this.title}) : super(key: key);
 
-  final String title;
+  final String? title;
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -32,7 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int badge = 0;
 
   List<GButton> tabs = [];
-  List<Color> colors = [
+  List<Color?> colors = [
     Colors.purple,
     Colors.pink,
     Colors.amber[600],
@@ -45,8 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
   }
 
-  _tabChanged(index) {
-    print(badge);
+  void _tabChanged(int index) {
     badge = badge + 1;
     setState(() {
       selectedIndex = index;
@@ -73,20 +72,18 @@ class _MyHomePageState extends State<MyHomePage> {
                         offset: Offset(0, 15))
                   ]),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 16.0, vertical: 22),
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 22),
                     child: GNav(
                         // backgroundColor: Colors.black,
                         gap: 10,
                         color: Colors.grey[600],
                         activeColor: Colors.white,
-                        rippleColor: Colors.grey[800],
-                        hoverColor: Colors.grey[700],
+                        rippleColor: Colors.grey[800]!,
+                        hoverColor: Colors.grey[700]!,
                         iconSize: 20,
                         textStyle: TextStyle(fontSize: 16, color: Colors.white),
-                        tabBackgroundColor: Colors.grey[900],
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 16.5),
+                        tabBackgroundColor: Colors.grey[900]!,
+                        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16.5),
                         duration: Duration(milliseconds: 800),
                         tabs: [
                           GButton(
@@ -94,7 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             text: 'Home',
                           ),
                           GButton(
-                            icon: LineIcons.heart_o,
+                            icon: LineIcons.heart,
                             text: 'Likes',
                           ),
                           GButton(
@@ -107,7 +104,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           )
                         ],
                         selectedIndex: selectedIndex,
-                        onTabChange: (index) => (_tabChanged(index))),
+                        onTabChange: (index) => _tabChanged(index)),
                   ),
                 ),
                 Container(
@@ -119,24 +116,18 @@ class _MyHomePageState extends State<MyHomePage> {
                         offset: Offset(0, 15))
                   ]),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 16.0, vertical: 22),
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 22),
                     child: GNav(
-                        tabActiveBorder: Border.all(
-                          color: Colors
-                              .black, //                   <--- border color
-                          width: 1.0,
-                        ),
+                        tabActiveBorder: Border.all(color: Colors.black),
                         gap: 10,
                         color: Colors.grey[600],
                         activeColor: Colors.black,
-                        rippleColor: Colors.grey[300],
-                        hoverColor: Colors.grey[100],
+                        rippleColor: Colors.grey[300]!,
+                        hoverColor: Colors.grey[100]!,
                         iconSize: 20,
                         textStyle: TextStyle(fontSize: 16, color: Colors.black),
                         // tabBackgroundColor: Colors.grey[100],
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 14.5),
+                        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14.5),
                         duration: Duration(milliseconds: 800),
                         tabs: [
                           GButton(
@@ -144,26 +135,22 @@ class _MyHomePageState extends State<MyHomePage> {
                             text: 'Get',
                           ),
                           GButton(
-                            icon: LineIcons.heart_o,
+                            icon: LineIcons.heart,
                             text: 'This',
                             leading: selectedIndex == 1 || badge == 0
                                 ? null
                                 : Badge(
                                     badgeColor: Colors.red.shade100,
                                     elevation: 0,
-                                    position: BadgePosition.topRight(
-                                        top: -12, right: -12),
+                                    position: BadgePosition.topEnd(top: -12, end: -12),
                                     badgeContent: Text(
                                       badge.toString(),
-                                      style:
-                                          TextStyle(color: Colors.red.shade900),
+                                      style: TextStyle(color: Colors.red.shade900),
                                     ),
                                     child: Icon(
-                                      LineIcons.heart_o,
+                                      LineIcons.heart,
                                       size: 20,
-                                      color: selectedIndex == 1
-                                          ? Colors.pink
-                                          : Colors.black,
+                                      color: selectedIndex == 1 ? Colors.pink : Colors.black,
                                     )),
                           ),
                           GButton(
@@ -174,23 +161,22 @@ class _MyHomePageState extends State<MyHomePage> {
                             icon: LineIcons.user,
                             text: 'Now!',
                             leading: CircleAvatar(
-                                radius: 12,
-                                backgroundImage: NetworkImage(
-                                    "https://sooxt98.space/content/images/size/w100/2019/01/profile.png")),
+                              radius: 12,
+                              backgroundImage: NetworkImage(
+                                  'https://sooxt98.space/content/images/size/w100/2019/01/profile.png'),
+                            ),
                           )
                         ],
                         selectedIndex: selectedIndex,
-                        onTabChange: (index) => (_tabChanged(index))),
+                        onTabChange: (index) => _tabChanged(index)),
                   ),
                 ),
                 Container(
-                  decoration: BoxDecoration(color: Colors.white, boxShadow: []),
+                  decoration: BoxDecoration(color: Colors.white),
                   child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 22.0, vertical: 14),
+                      padding: const EdgeInsets.symmetric(horizontal: 22.0, vertical: 14),
                       child: GNav(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 14),
+                          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
                           duration: Duration(milliseconds: 800),
                           gap: 8.5,
                           tabs: [
@@ -210,7 +196,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               textColor: Colors.pink,
                               backgroundColor: Colors.pink.withOpacity(.2),
                               iconSize: 24,
-                              icon: LineIcons.heart_o,
+                              icon: LineIcons.heart,
                               // textStyle: t.textStyle,
                               text: 'Likes',
                             ),
@@ -218,8 +204,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               iconActiveColor: Colors.amber[600],
                               iconColor: Colors.black,
                               textColor: Colors.amber[600],
-                              backgroundColor:
-                                  Colors.amber[600].withOpacity(.2),
+                              backgroundColor: Colors.amber[600]!.withOpacity(.2),
                               iconSize: 24,
                               icon: LineIcons.search,
                               // textStyle: t.textStyle,
@@ -237,27 +222,25 @@ class _MyHomePageState extends State<MyHomePage> {
                             )
                           ],
                           selectedIndex: selectedIndex,
-                          onTabChange: (index) => (_tabChanged(index)))),
+                          onTabChange: (index) => _tabChanged(index))),
                 ),
                 Container(
-                  decoration: BoxDecoration(color: Colors.white, boxShadow: []),
+                  decoration: BoxDecoration(color: Colors.white),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 16.0, vertical: 22),
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 22),
                     child: GNav(
                         tabBackgroundGradient: LinearGradient(
                             begin: Alignment.topRight,
                             end: Alignment.bottomLeft,
-                            colors: [Colors.lightBlue[100], Colors.cyan]),
+                            colors: [Colors.lightBlue[100]!, Colors.cyan]),
                         gap: 8,
                         tabBorderRadius: 15,
                         color: Colors.grey[600],
                         activeColor: Colors.white,
                         iconSize: 16,
                         textStyle: TextStyle(fontSize: 12, color: Colors.white),
-                        tabBackgroundColor: Colors.grey[800],
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 16.5),
+                        tabBackgroundColor: Colors.grey[800]!,
+                        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16.5),
                         duration: Duration(milliseconds: 800),
                         tabs: [
                           GButton(
@@ -265,7 +248,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             text: 'Home',
                           ),
                           GButton(
-                            icon: LineIcons.heart_o,
+                            icon: LineIcons.heart,
                             text: 'Likes',
                           ),
                           GButton(
@@ -277,12 +260,12 @@ class _MyHomePageState extends State<MyHomePage> {
                             text: 'Profile',
                           ),
                           GButton(
-                            icon: LineIcons.gear,
-                            text: 'Setting',
+                            icon: LineIcons.cog,
+                            text: 'Settings',
                           )
                         ],
                         selectedIndex: selectedIndex,
-                        onTabChange: (index) => (_tabChanged(index))),
+                        onTabChange: (index) => _tabChanged(index)),
                   ),
                 ),
               ],
