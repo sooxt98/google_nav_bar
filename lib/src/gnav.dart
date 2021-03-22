@@ -33,7 +33,7 @@ class GNav extends StatefulWidget {
 
   final List<GButton> tabs;
   final int selectedIndex;
-  final Function(int) onTabChange;
+  final ValueChanged<int> onTabChange;
   final double gap;
   final double tabBorderRadius;
   final double? iconSize;
