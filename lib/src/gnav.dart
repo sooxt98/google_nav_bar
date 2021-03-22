@@ -33,7 +33,7 @@ class GNav extends StatefulWidget {
 
   final List<GButton> tabs;
   final int selectedIndex;
-  final Function onTabChange;
+  final Function(int) onTabChange;
   final double gap;
   final double tabBorderRadius;
   final double? iconSize;
@@ -111,10 +111,8 @@ class _GNavState extends State<GNav> {
                       haptic: widget.haptic,
                       leading: t.leading,
                       curve: widget.curve,
-                      backgroundGradient:
-                          t.backgroundGradient ?? widget.tabBackgroundGradient,
-                      backgroundColor:
-                          t.backgroundColor ?? widget.tabBackgroundColor,
+                      backgroundGradient: t.backgroundGradient ?? widget.tabBackgroundGradient,
+                      backgroundColor: t.backgroundColor ?? widget.tabBackgroundColor,
                       duration: widget.duration,
                       onPressed: () {
                         if (!clickable) return;
