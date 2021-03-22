@@ -18,13 +18,11 @@ class _TabPageState extends State<TabPage> {
 
   PageController controller = PageController();
 
-  List<Color?> colors = [Colors.purple, Colors.pink, Colors.amber[600], Colors.teal];
+  List<Color> colors = [Colors.purple, Colors.pink, Colors.amber[600]!, Colors.teal];
 
   @override
   void initState() {
     super.initState();
-
-    // var padding = EdgeInsets.symmetric(horizontal: 18, vertical: 5);
   }
 
   @override
@@ -53,28 +51,26 @@ class _TabPageState extends State<TabPage> {
               color: colors[position],
             );
           },
-          itemCount: 4, // Can be null
+          itemCount: 4,
         ),
-        // backgroundColor: Colors.green,
-        // body: Container(color: Colors.red,),
         bottomNavigationBar: SafeArea(
           child: Container(
             margin: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
             decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(Radius.circular(100)),
-                boxShadow: [
-                  BoxShadow(
-                      spreadRadius: -10,
-                      blurRadius: 60,
-                      color: Colors.black.withOpacity(.4),
-                      offset: Offset(0, 25))
-                ]),
+              color: Colors.white,
+              borderRadius: BorderRadius.all(Radius.circular(100)),
+              boxShadow: [
+                BoxShadow(
+                  spreadRadius: -10,
+                  blurRadius: 60,
+                  color: Colors.black.withOpacity(.4),
+                  offset: Offset(0, 25),
+                )
+              ],
+            ),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 3.0, vertical: 3),
               child: GNav(
-                // curve: Curves.easeOutExpo,
-                // duration: Duration(milliseconds: 900),
                 tabs: [
                   GButton(
                     gap: gap,
@@ -85,7 +81,6 @@ class _TabPageState extends State<TabPage> {
                     iconSize: 24,
                     padding: padding,
                     icon: LineIcons.home,
-                    // textStyle: t.textStyle,
                     text: 'Home',
                   ),
                   GButton(
@@ -110,7 +105,8 @@ class _TabPageState extends State<TabPage> {
                             child: Icon(
                               LineIcons.heart,
                               color: selectedIndex == 1 ? Colors.pink : Colors.black,
-                            )),
+                            ),
+                          ),
                     text: 'Likes',
                   ),
                   GButton(
@@ -134,21 +130,20 @@ class _TabPageState extends State<TabPage> {
                     padding: padding,
                     icon: LineIcons.user,
                     leading: CircleAvatar(
-                        radius: 12,
-                        backgroundImage: NetworkImage(
-                            'https://sooxt98.space/content/images/size/w100/2019/01/profile.png')),
+                      radius: 12,
+                      backgroundImage: NetworkImage(
+                        'https://sooxt98.space/content/images/size/w100/2019/01/profile.png',
+                      ),
+                    ),
                     text: 'Sheldon',
                   )
                 ],
                 selectedIndex: selectedIndex,
                 onTabChange: (index) {
-                  // _debouncer.run(() {
                   setState(() {
                     selectedIndex = index;
-                    // badge = badge + 1;
                   });
                   controller.jumpToPage(index);
-                  // });
                 },
               ),
             ),

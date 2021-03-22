@@ -2,15 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 
-// import 'package:google_nav_bar/google_nav_bar.dart';
-
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -32,7 +29,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int selectedIndex = 0;
 
   List<GButton> tabs = [];
-  List<Color?> colors = [Colors.purple, Colors.pink, Colors.amber[600], Colors.teal];
+  List<Color> colors = [Colors.purple, Colors.pink, Colors.amber[600]!, Colors.teal];
 
   @override
   void initState() {
@@ -52,10 +49,11 @@ class _MyHomePageState extends State<MyHomePage> {
               color: Colors.white,
               boxShadow: [
                 BoxShadow(
-                    spreadRadius: -10,
-                    blurRadius: 60,
-                    color: Colors.black.withOpacity(.20),
-                    offset: Offset(0, 15))
+                  spreadRadius: -10,
+                  blurRadius: 60,
+                  color: Colors.black.withOpacity(.20),
+                  offset: Offset(0, 15),
+                )
               ],
             ),
             child: Padding(
