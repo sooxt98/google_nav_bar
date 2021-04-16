@@ -13,23 +13,16 @@ class TabPage extends StatefulWidget {
 class _TabPageState extends State<TabPage> {
   int selectedIndex = 0;
   int badge = 0;
-  var padding = EdgeInsets.symmetric(horizontal: 18, vertical: 12);
+  final padding = EdgeInsets.symmetric(horizontal: 18, vertical: 12);
   double gap = 10;
 
   PageController controller = PageController();
 
-  List<Color> colors = [
-    Colors.purple,
-    Colors.pink,
-    Colors.amber[600],
-    Colors.teal
-  ];
+  List<Color> colors = [Colors.purple, Colors.pink, Colors.amber[600]!, Colors.teal];
 
   @override
   void initState() {
     super.initState();
-
-    // var padding = EdgeInsets.symmetric(horizontal: 18, vertical: 5);
   }
 
   @override
@@ -58,112 +51,101 @@ class _TabPageState extends State<TabPage> {
               color: colors[position],
             );
           },
-          itemCount: 4, // Can be null
+          itemCount: 4,
         ),
-        // backgroundColor: Colors.green,
-        // body: Container(color: Colors.red,),
         bottomNavigationBar: SafeArea(
           child: Container(
             margin: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
             decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(Radius.circular(100)),
-                boxShadow: [
-                  BoxShadow(
-                      spreadRadius: -10,
-                      blurRadius: 60,
-                      color: Colors.black.withOpacity(.4),
-                      offset: Offset(0, 25))
-                ]),
+              color: Colors.white,
+              borderRadius: BorderRadius.all(Radius.circular(100)),
+              boxShadow: [
+                BoxShadow(
+                  spreadRadius: -10,
+                  blurRadius: 60,
+                  color: Colors.black.withOpacity(.4),
+                  offset: Offset(0, 25),
+                )
+              ],
+            ),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 3.0, vertical: 3),
               child: GNav(
-                  // curve: Curves.easeOutExpo,
-                  // duration: Duration(milliseconds: 900),
-                  tabs: [
-                    GButton(
-                      gap: gap,
-                      iconActiveColor: Colors.purple,
-                      iconColor: Colors.black,
-                      textColor: Colors.purple,
-                      backgroundColor: Colors.purple.withOpacity(.2),
-                      iconSize: 24,
-                      padding: padding,
-                      icon: LineIcons.home,
-                      // textStyle: t.textStyle,
-                      text: 'Home',
+                tabs: [
+                  GButton(
+                    gap: gap,
+                    iconActiveColor: Colors.purple,
+                    iconColor: Colors.black,
+                    textColor: Colors.purple,
+                    backgroundColor: Colors.purple.withOpacity(.2),
+                    iconSize: 24,
+                    padding: padding,
+                    icon: LineIcons.home,
+                    text: 'Home',
+                  ),
+                  GButton(
+                    gap: gap,
+                    iconActiveColor: Colors.pink,
+                    iconColor: Colors.black,
+                    textColor: Colors.pink,
+                    backgroundColor: Colors.pink.withOpacity(.2),
+                    iconSize: 24,
+                    padding: padding,
+                    icon: LineIcons.heart,
+                    leading: selectedIndex == 1 || badge == 0
+                        ? null
+                        : Badge(
+                            badgeColor: Colors.red.shade100,
+                            elevation: 0,
+                            position: BadgePosition.topEnd(top: -12, end: -12),
+                            badgeContent: Text(
+                              badge.toString(),
+                              style: TextStyle(color: Colors.red.shade900),
+                            ),
+                            child: Icon(
+                              LineIcons.heart,
+                              color: selectedIndex == 1 ? Colors.pink : Colors.black,
+                            ),
+                          ),
+                    text: 'Likes',
+                  ),
+                  GButton(
+                    gap: gap,
+                    iconActiveColor: Colors.amber[600],
+                    iconColor: Colors.black,
+                    textColor: Colors.amber[600],
+                    backgroundColor: Colors.amber[600]!.withOpacity(.2),
+                    iconSize: 24,
+                    padding: padding,
+                    icon: LineIcons.search,
+                    text: 'Search',
+                  ),
+                  GButton(
+                    gap: gap,
+                    iconActiveColor: Colors.teal,
+                    iconColor: Colors.black,
+                    textColor: Colors.teal,
+                    backgroundColor: Colors.teal.withOpacity(.2),
+                    iconSize: 24,
+                    padding: padding,
+                    icon: LineIcons.user,
+                    leading: CircleAvatar(
+                      radius: 12,
+                      backgroundImage: NetworkImage(
+                        'https://sooxt98.space/content/images/size/w100/2019/01/profile.png',
+                      ),
                     ),
-                    GButton(
-                      gap: gap,
-                      iconActiveColor: Colors.pink,
-                      iconColor: Colors.black,
-                      textColor: Colors.pink,
-                      backgroundColor: Colors.pink.withOpacity(.2),
-                      iconSize: 24,
-                      padding: padding,
-                      icon: LineIcons.heart_o,
-                      leading: selectedIndex == 1 || badge == 0
-                          ? null
-                          : Badge(
-                              badgeColor: Colors.red.shade100,
-                              elevation: 0,
-                              position:
-                                  BadgePosition.topRight(top: -12, right: -12),
-                              badgeContent: Text(
-                                badge.toString(),
-                                style: TextStyle(color: Colors.red.shade900),
-                              ),
-                              child: Icon(
-                                LineIcons.heart_o,
-                                color: selectedIndex == 1
-                                    ? Colors.pink
-                                    : Colors.black,
-                              )),
-
-// textStyle: t.textStyle,
-                      text: 'Likes',
-                    ),
-                    GButton(
-                      gap: gap,
-                      iconActiveColor: Colors.amber[600],
-                      iconColor: Colors.black,
-                      textColor: Colors.amber[600],
-                      backgroundColor: Colors.amber[600].withOpacity(.2),
-                      iconSize: 24,
-                      padding: padding,
-                      icon: LineIcons.search,
-// textStyle: t.textStyle,
-                      text: 'Search',
-                    ),
-                    GButton(
-                      gap: gap,
-                      iconActiveColor: Colors.teal,
-                      iconColor: Colors.black,
-                      textColor: Colors.teal,
-                      backgroundColor: Colors.teal.withOpacity(.2),
-                      iconSize: 24,
-                      padding: padding,
-                      icon: LineIcons.user,
-                      leading: CircleAvatar(
-                          radius: 12,
-                          backgroundImage: NetworkImage(
-                              "https://sooxt98.space/content/images/size/w100/2019/01/profile.png")),
-// textStyle: t.textStyle,
-                      text: 'Sheldon',
-                    )
-                  ],
-                  selectedIndex: selectedIndex,
-                  onTabChange: (index) {
-                    // _debouncer.run(() {
-
-                    print(index);
-                    setState(() {
-                      selectedIndex = index;
-                      // badge = badge + 1;
-                    });
-                    controller.jumpToPage(index);
-                    // });
-                  }),
+                    text: 'Sheldon',
+                  )
+                ],
+                selectedIndex: selectedIndex,
+                onTabChange: (index) {
+                  setState(() {
+                    selectedIndex = index;
+                  });
+                  controller.jumpToPage(index);
+                },
+              ),
             ),
           ),
         ),
