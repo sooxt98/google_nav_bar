@@ -78,7 +78,7 @@ class _ExampleState extends State<Example> {
                   text: 'Home',
                 ),
                 GButton(
-                  icon: LineIcons.heart,
+                  icon: LineIcons.heart_o,
                   text: 'Likes',
                 ),
                 GButton(
