@@ -134,7 +134,7 @@ class _ButtonState extends State<Button> with TickerProviderStateMixin {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Opacity(
-                      opacity: 10,
+                      opacity: 1.0,
                       child: icon,
                     ),
                     Container(
