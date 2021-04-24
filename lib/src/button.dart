@@ -129,18 +129,18 @@ class _ButtonState extends State<Button> with TickerProviderStateMixin {
             ),
             child: FittedBox(
               fit: BoxFit.fitHeight,
-              child: Stack(children: [
+              child: Column(children: [
                 Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  //mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Opacity(
-                      opacity: 1.0,
+                      opacity: 0,
                       child: icon,
                     ),
                     Container(
                       child: Container(
                         child: Align(
-                            alignment: Alignment.centerRight,
+                            //alignment: Alignment.centerRight,
                             widthFactor: curveValue,
                             child: Container(
                               child: Opacity(
@@ -173,7 +173,8 @@ class _ButtonState extends State<Button> with TickerProviderStateMixin {
                     ),
                   ],
                 ),
-                Align(alignment: Alignment.centerLeft, child: icon),
+                icon,
+                //Align(alignment: Alignment.centerLeft, child: icon),
               ]),
             ),
           ),
