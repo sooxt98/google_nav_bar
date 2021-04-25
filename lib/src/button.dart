@@ -133,47 +133,45 @@ class _ButtonState extends State<Button> with TickerProviderStateMixin {
                 Column(
                   //mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Opacity(
-                      opacity: 0,
-                      child: icon,
-                    ),
+                    icon,
                     Container(
-                      child: Container(
-                        child: Align(
-                            //alignment: Alignment.centerRight,
-                            widthFactor: curveValue,
-                            child: Container(
-                              child: Opacity(
-                                  opacity: _expanded
-                                      ? pow(expandController.value, 13)
-                                          as double
-                                      : expandController
-                                          .drive(
-                                              CurveTween(curve: Curves.easeIn))
-                                          .value,
-                                  child: Padding(
-                                    padding: EdgeInsets.only(
-                                        bottom: widget.gap! +
-                                            8 -
-                                            (8 *
-                                                expandController
-                                                    .drive(CurveTween(
-                                                        curve:
-                                                            Curves.easeOutSine))
-                                                    .value),
-                                        right: 8 *
-                                            expandController
-                                                .drive(CurveTween(
-                                                    curve: Curves.easeOutSine))
-                                                .value),
-                                    child: widget.text,
-                                  )),
-                            )),
-                      ),
+                      child: widget.text,
+                      // child: Container(
+                      //   child: Align(
+                      //       //alignment: Alignment.centerRight,
+                      //       widthFactor: curveValue,
+                      //       child: Container(
+                      //         child: Opacity(
+                      //             opacity: _expanded
+                      //                 ? pow(expandController.value, 13)
+                      //                     as double
+                      //                 : expandController
+                      //                     .drive(
+                      //                         CurveTween(curve: Curves.easeIn))
+                      //                     .value,
+                      //             child: Padding(
+                      //               padding: EdgeInsets.only(
+                      //                   bottom: widget.gap! +
+                      //                       8 -
+                      //                       (8 *
+                      //                           expandController
+                      //                               .drive(CurveTween(
+                      //                                   curve:
+                      //                                       Curves.easeOutSine))
+                      //                               .value),
+                      //                   right: 8 *
+                      //                       expandController
+                      //                           .drive(CurveTween(
+                      //                               curve: Curves.easeOutSine))
+                      //                           .value),
+                      //               child: widget.text,
+                      //             )),
+                      //       )),
+                      // ),
                     ),
                   ],
                 ),
-                icon,
+
                 //Align(alignment: Alignment.centerLeft, child: icon),
               ]),
             ),
