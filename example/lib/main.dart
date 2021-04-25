@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:line_icons/line_icons.dart';
 
 void main() => runApp(MaterialApp(
     builder: (context, child) {
@@ -18,8 +19,7 @@ class Example extends StatefulWidget {
 
 class _ExampleState extends State<Example> {
   int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.w600);
+  static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.w600);
   static const List<Widget> _widgetOptions = <Widget>[
     Text(
       'Home',
@@ -74,19 +74,19 @@ class _ExampleState extends State<Example> {
               tabBackgroundColor: Colors.grey[100]!,
               tabs: [
                 GButton(
-                  icon: Icons.home,
+                  icon: LineIcons.home,
                   text: 'Home',
                 ),
                 GButton(
-                  icon: Icons.favorite,
+                  icon: LineIcons.heart_o,
                   text: 'Likes',
                 ),
                 GButton(
-                  icon: Icons.search,
+                  icon: LineIcons.search,
                   text: 'Search',
                 ),
                 GButton(
-                  icon: Icons.person,
+                  icon: LineIcons.user,
                   text: 'Profile',
                 ),
               ],
