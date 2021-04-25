@@ -7,7 +7,7 @@ class GNav extends StatefulWidget {
     Key? key,
     required this.tabs,
     this.selectedIndex = 0,
-    required this.onTabChange,
+    this.onTabChange,
     this.gap = 0,
     this.padding = const EdgeInsets.all(25),
     this.activeColor,
@@ -33,7 +33,7 @@ class GNav extends StatefulWidget {
 
   final List<GButton> tabs;
   final int selectedIndex;
-  final Function onTabChange;
+  final Function? onTabChange;
   final double gap;
   final double tabBorderRadius;
   final double? iconSize;
@@ -122,7 +122,7 @@ class _GNavState extends State<GNav> {
                           selectedIndex = widget.tabs.indexOf(t);
                           clickable = false;
                         });
-                        widget.onTabChange(selectedIndex);
+                        widget.onTabChange!(selectedIndex);
 
                         Future.delayed(widget.duration, () {
                           setState(() {
