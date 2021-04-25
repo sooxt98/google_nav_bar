@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'gbutton.dart';
 
+enum GNavType {
+  defaultType,
+  customType1,
+}
+
 class GNav extends StatefulWidget {
   const GNav({
     Key? key,
@@ -29,6 +34,8 @@ class GNav extends StatefulWidget {
     this.haptic = true,
     this.tabBackgroundGradient,
     this.mainAxisAlignment = MainAxisAlignment.spaceBetween,
+    this.gNavType = GNavType.defaultType,
+    this.textSize,
   }) : super(key: key);
 
   final List<GButton> tabs;
@@ -55,6 +62,8 @@ class GNav extends StatefulWidget {
   final List<BoxShadow>? tabShadow;
   final Gradient? tabBackgroundGradient;
   final MainAxisAlignment mainAxisAlignment;
+  final GNavType gNavType;
+  final double? textSize;
 
   @override
   _GNavState createState() => _GNavState();
@@ -86,6 +95,8 @@ class _GNavState extends State<GNav> {
             mainAxisAlignment: widget.mainAxisAlignment,
             children: widget.tabs
                 .map((t) => GButton(
+                      textSize: widget.textSize,
+                      gNavType: widget.gNavType,
                       key: t.key,
                       border: t.border ?? widget.tabBorder,
                       activeBorder: t.activeBorder ?? widget.tabActiveBorder,
@@ -111,8 +122,10 @@ class _GNavState extends State<GNav> {
                       haptic: widget.haptic,
                       leading: t.leading,
                       curve: widget.curve,
-                      backgroundGradient: t.backgroundGradient ?? widget.tabBackgroundGradient,
-                      backgroundColor: t.backgroundColor ?? widget.tabBackgroundColor,
+                      backgroundGradient:
+                          t.backgroundGradient ?? widget.tabBackgroundGradient,
+                      backgroundColor:
+                          t.backgroundColor ?? widget.tabBackgroundColor,
                       duration: widget.duration,
                       onPressed: () {
                         if (!clickable) return;

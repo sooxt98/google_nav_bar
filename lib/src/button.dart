@@ -1,6 +1,7 @@
 import 'dart:math' show pow;
 
 import 'package:flutter/material.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 
 class Button extends StatefulWidget {
   const Button({
@@ -27,6 +28,8 @@ class Button extends StatefulWidget {
     this.border,
     this.activeBorder,
     this.shadow,
+    this.gNavType = GNavType.defaultType,
+    this.textSize,
   }) : super(key: key);
 
   final IconData? icon;
@@ -51,6 +54,8 @@ class Button extends StatefulWidget {
   final Border? border;
   final Border? activeBorder;
   final List<BoxShadow>? shadow;
+  final GNavType gNavType;
+  final double? textSize;
 
   @override
   _ButtonState createState() => _ButtonState();
@@ -129,47 +134,78 @@ class _ButtonState extends State<Button> with TickerProviderStateMixin {
             ),
             child: FittedBox(
               fit: BoxFit.fitHeight,
-              child: Stack(children: [
-                Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                  Opacity(
-                    opacity: 0,
-                    child: icon,
-                  ),
-                  Container(
-                    child: Container(
-                      child: Align(
-                          alignment: Alignment.centerRight,
-                          widthFactor: curveValue,
-                          child: Container(
-                            child: Opacity(
-                                opacity: _expanded
-                                    ? pow(expandController.value, 13) as double
-                                    : expandController
-                                        .drive(CurveTween(curve: Curves.easeIn))
-                                        .value,
-                                child: Padding(
-                                  padding: EdgeInsets.only(
-                                      left: widget.gap! +
-                                          8 -
-                                          (8 *
-                                              expandController
-                                                  .drive(CurveTween(
-                                                      curve:
-                                                          Curves.easeOutSine))
-                                                  .value),
-                                      right: 8 *
-                                          expandController
-                                              .drive(CurveTween(
-                                                  curve: Curves.easeOutSine))
-                                              .value),
-                                  child: widget.text,
-                                )),
-                          )),
-                    ),
-                  ),
-                ]),
-                Align(alignment: Alignment.centerLeft, child: icon),
-              ]),
+              child: Builder(
+                builder: (_) {
+                  if (widget.gNavType == GNavType.defaultType) {
+                    return Stack(
+                      children: [
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Opacity(
+                                opacity: 0,
+                                child: icon,
+                              ),
+                              Container(
+                                child: Container(
+                                  child: Align(
+                                      alignment: Alignment.centerRight,
+                                      widthFactor: curveValue,
+                                      child: Container(
+                                        child: Opacity(
+                                            opacity: _expanded
+                                                ? pow(expandController.value,
+                                                    13) as double
+                                                : expandController
+                                                    .drive(CurveTween(
+                                                        curve: Curves.easeIn))
+                                                    .value,
+                                            child: Padding(
+                                              padding: EdgeInsets.only(
+                                                  left: widget.gap! +
+                                                      8 -
+                                                      (8 *
+                                                          expandController
+                                                              .drive(CurveTween(
+                                                                  curve: Curves
+                                                                      .easeOutSine))
+                                                              .value),
+                                                  right: 8 *
+                                                      expandController
+                                                          .drive(CurveTween(
+                                                              curve: Curves
+                                                                  .easeOutSine))
+                                                          .value),
+                                              child: widget.text,
+                                            )),
+                                      )),
+                                ),
+                              ),
+                            ]),
+                        Align(alignment: Alignment.centerLeft, child: icon),
+                      ],
+                    );
+                  } else if (widget.gNavType == GNavType.customType1) {
+                    return Column(
+                      children: [
+                        icon,
+                        Container(
+                          padding: EdgeInsets.only(top: widget.gap!),
+                          child: Text(
+                            widget.text!.data!,
+                            style: TextStyle(
+                              color: _colorTweenAnimation.value,
+                              fontSize: widget.textSize ?? 16,
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  } else {
+                    return Container();
+                  }
+                },
+              ),
             ),
           ),
         ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show HapticFeedback;
+import 'package:google_nav_bar/google_nav_bar.dart';
 
 import 'button.dart';
 
@@ -30,6 +31,8 @@ class GButton extends StatefulWidget {
   final Border? activeBorder;
   final List<BoxShadow>? shadow;
   final String? semanticLabel;
+  final GNavType gNavType;
+  final double? textSize;
 
   const GButton({
     Key? key,
@@ -59,6 +62,8 @@ class GButton extends StatefulWidget {
     this.activeBorder,
     this.shadow,
     this.semanticLabel,
+    this.gNavType = GNavType.defaultType,
+    this.textSize,
   }) : super(key: key);
 
   @override
@@ -71,6 +76,8 @@ class _GButtonState extends State<GButton> {
     return Semantics(
       label: widget.semanticLabel ?? widget.text,
       child: Button(
+        textSize: widget.textSize,
+        gNavType: widget.gNavType,
         borderRadius: widget.borderRadius,
         border: widget.border,
         activeBorder: widget.activeBorder,
