@@ -1,3 +1,9 @@
+## 5.0.5
+* Fixed GButton onPressed not working
+
+## 5.0.4
+* Updated example
+
 ## 5.0.3
 * Empty out the test file
 

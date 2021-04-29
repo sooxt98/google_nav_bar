@@ -81,7 +81,7 @@ class _GButtonState extends State<GButton> {
         active: widget.active,
         onPressed: () {
           if (widget.haptic!) HapticFeedback.selectionClick();
-          widget.onPressed!();
+          widget.onPressed?.call();
         },
         padding: widget.padding,
         margin: widget.margin,

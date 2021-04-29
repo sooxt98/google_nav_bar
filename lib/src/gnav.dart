@@ -123,6 +123,8 @@ class _GNavState extends State<GNav> {
                           clickable = false;
                         });
 
+                        t.onPressed?.call();
+
                         widget.onTabChange?.call(selectedIndex);
 
                         Future.delayed(widget.duration, () {
