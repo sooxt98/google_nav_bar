@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'gbutton.dart';
 
-enum GNavType {
+enum Style {
   defaultType,
-  customType1,
+  oldSchool,
 }
 
 class GNav extends StatefulWidget {
@@ -34,7 +34,7 @@ class GNav extends StatefulWidget {
     this.haptic = true,
     this.tabBackgroundGradient,
     this.mainAxisAlignment = MainAxisAlignment.spaceBetween,
-    this.gNavType = GNavType.defaultType,
+    this.style = Style.defaultType,
     this.textSize,
   }) : super(key: key);
 
@@ -62,7 +62,7 @@ class GNav extends StatefulWidget {
   final List<BoxShadow>? tabShadow;
   final Gradient? tabBackgroundGradient;
   final MainAxisAlignment mainAxisAlignment;
-  final GNavType gNavType;
+  final Style? style;
   final double? textSize;
 
   @override
@@ -96,7 +96,7 @@ class _GNavState extends State<GNav> {
             children: widget.tabs
                 .map((t) => GButton(
                       textSize: widget.textSize,
-                      gNavType: widget.gNavType,
+                      style: widget.style,
                       key: t.key,
                       border: t.border ?? widget.tabBorder,
                       activeBorder: t.activeBorder ?? widget.tabActiveBorder,

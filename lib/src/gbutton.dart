@@ -31,7 +31,7 @@ class GButton extends StatefulWidget {
   final Border? activeBorder;
   final List<BoxShadow>? shadow;
   final String? semanticLabel;
-  final GNavType gNavType;
+  final Style? style;
   final double? textSize;
 
   const GButton({
@@ -62,7 +62,7 @@ class GButton extends StatefulWidget {
     this.activeBorder,
     this.shadow,
     this.semanticLabel,
-    this.gNavType = GNavType.defaultType,
+    this.style = Style.defaultType,
     this.textSize,
   }) : super(key: key);
 
@@ -77,7 +77,7 @@ class _GButtonState extends State<GButton> {
       label: widget.semanticLabel ?? widget.text,
       child: Button(
         textSize: widget.textSize,
-        gNavType: widget.gNavType,
+        style: widget.style,
         borderRadius: widget.borderRadius,
         border: widget.border,
         activeBorder: widget.activeBorder,
