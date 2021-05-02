@@ -28,7 +28,7 @@ class Button extends StatefulWidget {
     this.border,
     this.activeBorder,
     this.shadow,
-    this.style = Style.google,
+    this.style = GnavStyle.google,
     this.textSize,
   }) : super(key: key);
 
@@ -54,7 +54,7 @@ class Button extends StatefulWidget {
   final Border? border;
   final Border? activeBorder;
   final List<BoxShadow>? shadow;
-  final Style? style;
+  final GnavStyle? style;
   final double? textSize;
 
   @override
@@ -136,7 +136,7 @@ class _ButtonState extends State<Button> with TickerProviderStateMixin {
               fit: BoxFit.fitHeight,
               child: Builder(
                 builder: (_) {
-                  if (widget.style == Style.google) {
+                  if (widget.style == GnavStyle.google) {
                     return Stack(
                       children: [
                         Row(
@@ -185,7 +185,7 @@ class _ButtonState extends State<Button> with TickerProviderStateMixin {
                         Align(alignment: Alignment.centerLeft, child: icon),
                       ],
                     );
-                  } else if (widget.style == Style.oldSchool) {
+                  } else if (widget.style == GnavStyle.oldSchool) {
                     return Column(
                       children: [
                         icon,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'gbutton.dart';
 
-enum Style {
+enum GnavStyle {
   google,
   oldSchool,
 }
@@ -34,7 +34,7 @@ class GNav extends StatefulWidget {
     this.haptic = true,
     this.tabBackgroundGradient,
     this.mainAxisAlignment = MainAxisAlignment.spaceBetween,
-    this.style = Style.google,
+    this.style = GnavStyle.google,
     this.textSize,
   }) : super(key: key);
 
@@ -62,7 +62,7 @@ class GNav extends StatefulWidget {
   final List<BoxShadow>? tabShadow;
   final Gradient? tabBackgroundGradient;
   final MainAxisAlignment mainAxisAlignment;
-  final Style? style;
+  final GnavStyle? style;
   final double? textSize;
 
   @override

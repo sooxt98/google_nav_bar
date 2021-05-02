@@ -31,7 +31,7 @@ class GButton extends StatefulWidget {
   final Border? activeBorder;
   final List<BoxShadow>? shadow;
   final String? semanticLabel;
-  final Style? style;
+  final GnavStyle? style;
   final double? textSize;
 
   const GButton({
@@ -62,7 +62,7 @@ class GButton extends StatefulWidget {
     this.activeBorder,
     this.shadow,
     this.semanticLabel,
-    this.style = Style.google,
+    this.style = GnavStyle.google,
     this.textSize,
   }) : super(key: key);
 
