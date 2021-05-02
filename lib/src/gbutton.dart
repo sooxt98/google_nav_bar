@@ -62,7 +62,7 @@ class GButton extends StatefulWidget {
     this.activeBorder,
     this.shadow,
     this.semanticLabel,
-    this.style = Style.defaultType,
+    this.style = Style.google,
     this.textSize,
   }) : super(key: key);
 

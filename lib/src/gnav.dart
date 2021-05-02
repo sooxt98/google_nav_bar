@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'gbutton.dart';
 
 enum Style {
-  defaultType,
+  google,
   oldSchool,
 }
 
@@ -34,7 +34,7 @@ class GNav extends StatefulWidget {
     this.haptic = true,
     this.tabBackgroundGradient,
     this.mainAxisAlignment = MainAxisAlignment.spaceBetween,
-    this.style = Style.defaultType,
+    this.style = Style.google,
     this.textSize,
   }) : super(key: key);
 

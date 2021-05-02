@@ -28,7 +28,7 @@ class Button extends StatefulWidget {
     this.border,
     this.activeBorder,
     this.shadow,
-    this.style = Style.defaultType,
+    this.style = Style.google,
     this.textSize,
   }) : super(key: key);
 
@@ -136,7 +136,7 @@ class _ButtonState extends State<Button> with TickerProviderStateMixin {
               fit: BoxFit.fitHeight,
               child: Builder(
                 builder: (_) {
-                  if (widget.style == Style.defaultType) {
+                  if (widget.style == Style.google) {
                     return Stack(
                       children: [
                         Row(
