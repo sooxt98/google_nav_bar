@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:badges/badges.dart';
@@ -36,12 +37,12 @@ class _TabPageState extends State<TabPage> {
       home: Scaffold(
         extendBody: true,
         appBar: AppBar(
-          brightness: Brightness.light,
           title: Text(
             'GoogleNavBar',
             style: TextStyle(color: Colors.black),
           ),
           backgroundColor: Colors.white,
+          systemOverlayStyle: SystemUiOverlayStyle.dark,
         ),
         body: PageView.builder(
           onPageChanged: (page) {
