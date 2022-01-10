@@ -8,6 +8,7 @@ class GButton extends StatefulWidget {
   final bool? active;
   final bool? debug;
   final bool? haptic;
+  final bool? showText;
   final double? gap;
   final Color? iconColor;
   final Color? rippleColor;
@@ -38,6 +39,7 @@ class GButton extends StatefulWidget {
     Key? key,
     this.active,
     this.haptic,
+    this.showText = true,
     this.backgroundColor,
     required this.icon,
     this.iconColor,
@@ -102,14 +104,16 @@ class _GButtonState extends State<GButton> {
         iconActiveColor: widget.iconActiveColor,
         iconColor: widget.iconColor,
         icon: widget.icon,
-        text: Text(
-          widget.text,
-          style: widget.textStyle ??
-              TextStyle(
-                fontWeight: FontWeight.w600,
-                color: widget.textColor,
-              ),
-        ),
+        text: widget.showText!
+            ? Text(
+                widget.text,
+                style: widget.textStyle ??
+                    TextStyle(
+                      fontWeight: FontWeight.w600,
+                      color: widget.textColor,
+                    ),
+              )
+            : null,
       ),
     );
   }
