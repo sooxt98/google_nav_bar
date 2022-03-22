@@ -139,49 +139,50 @@ class _ButtonState extends State<Button> with TickerProviderStateMixin {
                   if (widget.style == GnavStyle.google) {
                     return Stack(
                       children: [
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Opacity(
-                                opacity: 0,
-                                child: icon,
-                              ),
-                              Container(
-                                child: Container(
-                                  child: Align(
-                                      alignment: Alignment.centerRight,
-                                      widthFactor: curveValue,
-                                      child: Container(
-                                        child: Opacity(
-                                            opacity: _expanded
-                                                ? pow(expandController.value,
-                                                    13) as double
-                                                : expandController
-                                                    .drive(CurveTween(
-                                                        curve: Curves.easeIn))
-                                                    .value,
-                                            child: Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: widget.gap! +
-                                                      8 -
-                                                      (8 *
-                                                          expandController
-                                                              .drive(CurveTween(
-                                                                  curve: Curves
-                                                                      .easeOutSine))
-                                                              .value),
-                                                  right: 8 *
-                                                      expandController
-                                                          .drive(CurveTween(
-                                                              curve: Curves
-                                                                  .easeOutSine))
-                                                          .value),
-                                              child: widget.text,
-                                            )),
-                                      )),
+                        if (widget.text!.data != '')
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Opacity(
+                                  opacity: 0,
+                                  child: icon,
                                 ),
-                              ),
-                            ]),
+                                Container(
+                                  child: Container(
+                                    child: Align(
+                                        alignment: Alignment.centerRight,
+                                        widthFactor: curveValue,
+                                        child: Container(
+                                          child: Opacity(
+                                              opacity: _expanded
+                                                  ? pow(expandController.value,
+                                                      13) as double
+                                                  : expandController
+                                                      .drive(CurveTween(
+                                                          curve: Curves.easeIn))
+                                                      .value,
+                                              child: Padding(
+                                                padding: EdgeInsets.only(
+                                                    left: widget.gap! +
+                                                        8 -
+                                                        (8 *
+                                                            expandController
+                                                                .drive(CurveTween(
+                                                                    curve: Curves
+                                                                        .easeOutSine))
+                                                                .value),
+                                                    right: 8 *
+                                                        expandController
+                                                            .drive(CurveTween(
+                                                                curve: Curves
+                                                                    .easeOutSine))
+                                                            .value),
+                                                child: widget.text,
+                                              )),
+                                        )),
+                                  ),
+                                ),
+                              ]),
                         Align(alignment: Alignment.centerLeft, child: icon),
                       ],
                     );

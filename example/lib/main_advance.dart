@@ -114,7 +114,6 @@ class _TabPageState extends State<TabPage> {
                                   : Colors.black,
                             ),
                           ),
-                    text: 'Likes',
                   ),
                   GButton(
                     gap: gap,
