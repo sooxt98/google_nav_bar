@@ -1,3 +1,7 @@
+## 5.0.6
+* Fixed GButton empty text extra spacing
+* Migrated to Android embedding v2
+
 ## 5.0.5
 * Fixed GButton onPressed not working
 
