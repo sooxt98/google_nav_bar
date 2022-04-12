@@ -14,6 +14,7 @@ class GNav extends StatefulWidget {
     this.selectedIndex = 0,
     this.onTabChange,
     this.gap = 0,
+    this.height = null,
     this.padding = const EdgeInsets.all(25),
     this.activeColor,
     this.color,
@@ -42,6 +43,7 @@ class GNav extends StatefulWidget {
   final int selectedIndex;
   final ValueChanged<int>? onTabChange;
   final double gap;
+  final double? height;
   final double tabBorderRadius;
   final double? iconSize;
   final Color? activeColor;
@@ -106,6 +108,7 @@ class GNavState extends State<GNav> {
   @override
   Widget build(BuildContext context) {
     return Container(
+        height: widget.height,
         color: widget.backgroundColor,
         child: Row(
             mainAxisAlignment: widget.mainAxisAlignment,
