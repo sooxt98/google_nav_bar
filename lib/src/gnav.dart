@@ -87,6 +87,24 @@ class GNavState extends State<GNav> {
     }
   }
 
+  /// change active tab index; can be used with [PageView].
+  Future<void> animateTo(int index, {int? from}) async {
+    setState(() {
+      selectedIndex = index;
+      clickable = false;
+    });
+
+    //t.onPressed?.call();
+
+    widget.onTabChange?.call(selectedIndex);
+
+    Future.delayed(widget.duration, () {
+      setState(() {
+        clickable = true;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
