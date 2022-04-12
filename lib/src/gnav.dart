@@ -66,10 +66,10 @@ class GNav extends StatefulWidget {
   final double? textSize;
 
   @override
-  _GNavState createState() => _GNavState();
+  GNavState createState() => GNavState();
 }
 
-class _GNavState extends State<GNav> {
+class GNavState extends State<GNav> {
   late int selectedIndex;
   bool clickable = true;
 
