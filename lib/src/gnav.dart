@@ -66,10 +66,10 @@ class GNav extends StatefulWidget {
   final double? textSize;
 
   @override
-  _GNavState createState() => _GNavState();
+  GNavState createState() => GNavState();
 }
 
-class _GNavState extends State<GNav> {
+class GNavState extends State<GNav> {
   late int selectedIndex;
   bool clickable = true;
 
@@ -85,6 +85,22 @@ class _GNavState extends State<GNav> {
     if (widget.selectedIndex != oldWidget.selectedIndex) {
       selectedIndex = widget.selectedIndex;
     }
+  }
+
+  /// change active tab index
+  Future<void> animateTo(int index) async {
+    setState(() {
+      selectedIndex = index;
+      clickable = false;
+    });
+
+    widget.onTabChange?.call(selectedIndex);
+
+    Future.delayed(widget.duration, () {
+      setState(() {
+        clickable = true;
+      });
+    });
   }
 
   @override
