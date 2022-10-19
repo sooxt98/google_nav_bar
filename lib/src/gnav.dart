@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'gbutton.dart';
 
+extension GNavContext on BuildContext {
+  /// GNav
+  _GNavState? get gNav => GNav.of(this);
+}
+
 enum GnavStyle {
   google,
   oldSchool,
@@ -67,11 +72,34 @@ class GNav extends StatefulWidget {
 
   @override
   _GNavState createState() => _GNavState();
+
+  /// static function to provide the drawer state
+  static _GNavState? of(BuildContext context) {
+    return context.findAncestorStateOfType<State<GNav>>() as _GNavState?;
+  }
 }
 
 class _GNavState extends State<GNav> {
   late int selectedIndex;
   bool clickable = true;
+
+  Future<void> animateTo(int index) async {
+    if (!clickable) return;
+    setState(() {
+      selectedIndex = index;
+      clickable = false;
+    });
+
+    widget.tabs[selectedIndex].onPressed?.call();
+
+    widget.onTabChange?.call(selectedIndex);
+
+    await Future.delayed(widget.duration, () {
+      setState(() {
+        clickable = true;
+      });
+    });
+  }
 
   @override
   void initState() {
