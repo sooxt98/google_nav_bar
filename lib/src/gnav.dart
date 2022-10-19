@@ -4,7 +4,7 @@ import 'gbutton.dart';
 
 extension GNavContext on BuildContext {
   /// GNav
-  _GNavState? get gNav => GNav.of(this);
+  GNavState? get gNav => GNav.of(this);
 }
 
 enum GnavStyle {
@@ -71,15 +71,15 @@ class GNav extends StatefulWidget {
   final double? textSize;
 
   @override
-  _GNavState createState() => _GNavState();
+  GNavState createState() => GNavState();
 
   /// static function to provide the drawer state
-  static _GNavState? of(BuildContext context) {
-    return context.findAncestorStateOfType<State<GNav>>() as _GNavState?;
+  static GNavState? of(BuildContext context) {
+    return context.findAncestorStateOfType<State<GNav>>() as GNavState?;
   }
 }
 
-class _GNavState extends State<GNav> {
+class GNavState extends State<GNav> {
   late int selectedIndex;
   bool clickable = true;
 
