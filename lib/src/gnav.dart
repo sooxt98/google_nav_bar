@@ -83,21 +83,9 @@ class _GNavState extends State<GNav> {
   late int selectedIndex;
   bool clickable = true;
 
-  Future<void> animateTo(int index) async {
-    // if (!clickable) return;
+  Future<void> animateTo(int toIndex) async {
     setState(() {
-      selectedIndex = index;
-      clickable = false;
-    });
-
-    widget.tabs[selectedIndex].onPressed?.call();
-
-    widget.onTabChange?.call(selectedIndex);
-
-    await Future.delayed(widget.duration, () {
-      setState(() {
-        clickable = true;
-      });
+      selectedIndex = toIndex;
     });
   }
 
