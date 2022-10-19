@@ -84,7 +84,7 @@ class _GNavState extends State<GNav> {
   bool clickable = true;
 
   Future<void> animateTo(int index) async {
-    if (!clickable) return;
+    // if (!clickable) return;
     setState(() {
       selectedIndex = index;
       clickable = false;
