@@ -36,7 +36,7 @@ class GNav extends StatefulWidget {
 class GNavState extends State<GNav> {
   late int selectedIndex;
 
-  late final buttonStyle = widget.buttonStyle;
+  late GButtonStyle buttonStyle = widget.buttonStyle;
   bool clickable = true;
 
   // Animation only
@@ -66,12 +66,14 @@ class GNavState extends State<GNav> {
   @override
   void initState() {
     super.initState();
+    buttonStyle = widget.buttonStyle;
     selectedIndex = widget.selectedIndex;
   }
 
   @override
   void didUpdateWidget(GNav oldWidget) {
     super.didUpdateWidget(oldWidget);
+    buttonStyle = widget.buttonStyle;
     if (widget.selectedIndex != oldWidget.selectedIndex) {
       selectedIndex = widget.selectedIndex;
     }
