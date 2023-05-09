@@ -1,4 +1,3 @@
-import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -78,31 +77,37 @@ class _MyHomePageState extends State<MyHomePage> {
                   padding: const EdgeInsets.symmetric(
                       horizontal: 16.0, vertical: 22),
                   child: GNav(
-                    gap: 10,
-                    color: Colors.grey[600],
-                    activeColor: Colors.white,
-                    rippleColor: Colors.grey[800]!,
-                    hoverColor: Colors.grey[700]!,
-                    iconSize: 20,
-                    textStyle: TextStyle(fontSize: 16, color: Colors.white),
-                    tabBackgroundColor: Colors.grey[900]!,
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 20, vertical: 16.5),
-                    duration: Duration(milliseconds: 800),
+                    buttonStyle: GButtonStyle(
+                      gap: 10,
+                      iconColor: Colors.grey[600],
+                      iconActiveColor: Colors.white,
+                      rippleColor: Colors.grey[800]!,
+                      hoverColor: Colors.grey[700]!,
+                      iconSize: 20,
+                      textStyle: TextStyle(fontSize: 16, color: Colors.white),
+                      backgroundColor: Colors.grey[900]!,
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 16.5),
+                      duration: Duration(milliseconds: 800),
+                    ),
                     tabs: [
                       GButton(
+                        index: 0,
                         icon: LineIcons.home,
                         text: 'Home',
                       ),
                       GButton(
+                        index: 1,
                         icon: LineIcons.heart,
                         text: 'Likes',
                       ),
                       GButton(
+                        index: 2,
                         icon: LineIcons.search,
                         text: 'Search',
                       ),
                       GButton(
+                        index: 3,
                         icon: LineIcons.user,
                         text: 'Profile',
                       ),
@@ -128,33 +133,34 @@ class _MyHomePageState extends State<MyHomePage> {
                   padding: const EdgeInsets.symmetric(
                       horizontal: 16.0, vertical: 22),
                   child: GNav(
-                    tabActiveBorder: Border.all(color: Colors.black),
-                    gap: 10,
-                    color: Colors.grey[600],
-                    activeColor: Colors.black,
-                    rippleColor: Colors.grey[300]!,
-                    hoverColor: Colors.grey[100]!,
-                    iconSize: 20,
-                    textStyle: TextStyle(fontSize: 16, color: Colors.black),
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 20, vertical: 14.5),
-                    duration: Duration(milliseconds: 800),
+                    buttonStyle: GButtonStyle(
+                      activeBorder: Border.all(color: Colors.black),
+                      gap: 10,
+                      iconColor: Colors.grey[600],
+                      iconActiveColor: Colors.black,
+                      rippleColor: Colors.grey[300]!,
+                      hoverColor: Colors.grey[100]!,
+                      iconSize: 20,
+                      textStyle: TextStyle(fontSize: 16, color: Colors.black),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 14.5),
+                      duration: Duration(milliseconds: 800),
+                    ),
                     tabs: [
                       GButton(
+                        index: 0,
                         icon: LineIcons.home,
                         text: 'Get',
                       ),
                       GButton(
+                        index: 1,
                         icon: LineIcons.heart,
                         text: 'This',
                         leading: selectedIndex == 1 || badge == 0
                             ? null
                             : Badge(
-                                badgeColor: Colors.red.shade100,
-                                elevation: 0,
-                                position:
-                                    BadgePosition.topEnd(top: -12, end: -12),
-                                badgeContent: Text(
+                                backgroundColor: Colors.red.shade100,
+                                label: Text(
                                   badge.toString(),
                                   style: TextStyle(color: Colors.red.shade900),
                                 ),
@@ -168,10 +174,12 @@ class _MyHomePageState extends State<MyHomePage> {
                               ),
                       ),
                       GButton(
+                        index: 2,
                         icon: LineIcons.search,
                         text: 'NavBar',
                       ),
                       GButton(
+                        index: 3,
                         icon: LineIcons.user,
                         text: 'Now!',
                         leading: CircleAvatar(
@@ -192,43 +200,35 @@ class _MyHomePageState extends State<MyHomePage> {
                   padding: const EdgeInsets.symmetric(
                       horizontal: 22.0, vertical: 14),
                   child: GNav(
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
-                    duration: Duration(milliseconds: 800),
-                    gap: 8.5,
+                    buttonStyle: GButtonStyle(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+                      gap: 8.5,
+                      iconActiveColor: Colors.purple,
+                      iconColor: Colors.black,
+                      textColor: Colors.purple,
+                      backgroundColor: Colors.purple.withOpacity(.2),
+                      iconSize: 24,
+                      duration: Duration(milliseconds: 800),
+                    ),
                     tabs: [
                       GButton(
-                        iconActiveColor: Colors.purple,
-                        iconColor: Colors.black,
-                        textColor: Colors.purple,
-                        backgroundColor: Colors.purple.withOpacity(.2),
-                        iconSize: 24,
+                        index: 0,
                         icon: LineIcons.home,
                         text: 'Home',
                       ),
                       GButton(
-                        iconActiveColor: Colors.pink,
-                        iconColor: Colors.black,
-                        textColor: Colors.pink,
-                        backgroundColor: Colors.pink.withOpacity(.2),
-                        iconSize: 24,
+                        index: 1,
                         icon: LineIcons.heart,
                         text: 'Likes',
                       ),
                       GButton(
-                        iconActiveColor: Colors.amber[600],
-                        iconColor: Colors.black,
-                        textColor: Colors.amber[600],
-                        backgroundColor: Colors.amber[600]!.withOpacity(.2),
-                        iconSize: 24,
+                        index: 2,
                         icon: LineIcons.search,
                         text: 'Search',
                       ),
                       GButton(
-                        iconActiveColor: Colors.teal,
-                        iconColor: Colors.black,
-                        textColor: Colors.teal,
-                        backgroundColor: Colors.teal.withOpacity(.2),
-                        iconSize: 24,
+                        index: 3,
                         icon: LineIcons.user,
                         text: 'Profile',
                       )
@@ -244,39 +244,48 @@ class _MyHomePageState extends State<MyHomePage> {
                   padding: const EdgeInsets.symmetric(
                       horizontal: 16.0, vertical: 22),
                   child: GNav(
-                    tabBackgroundGradient: LinearGradient(
-                      begin: Alignment.topRight,
-                      end: Alignment.bottomLeft,
-                      colors: [Colors.lightBlue[100]!, Colors.cyan],
+                    buttonStyle: GButtonStyle(
+                      backgroundGradient: LinearGradient(
+                        begin: Alignment.topRight,
+                        end: Alignment.bottomLeft,
+                        colors: [Colors.lightBlue[100]!, Colors.cyan],
+                      ),
+                      gap: 8,
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(15),
+                      ),
+                      iconColor: Colors.grey[600],
+                      iconActiveColor: Colors.white,
+                      iconSize: 16,
+                      textStyle: TextStyle(fontSize: 12, color: Colors.white),
+                      backgroundColor: Colors.grey[800]!,
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 16.5),
+                      duration: Duration(milliseconds: 800),
                     ),
-                    gap: 8,
-                    tabBorderRadius: 15,
-                    color: Colors.grey[600],
-                    activeColor: Colors.white,
-                    iconSize: 16,
-                    textStyle: TextStyle(fontSize: 12, color: Colors.white),
-                    tabBackgroundColor: Colors.grey[800]!,
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 20, vertical: 16.5),
-                    duration: Duration(milliseconds: 800),
                     tabs: [
                       GButton(
+                        index: 0,
                         icon: LineIcons.home,
                         text: 'Home',
                       ),
                       GButton(
+                        index: 1,
                         icon: LineIcons.heart,
                         text: 'Likes',
                       ),
                       GButton(
+                        index: 2,
                         icon: LineIcons.search,
                         text: 'Search',
                       ),
                       GButton(
+                        index: 3,
                         icon: LineIcons.user,
                         text: 'Profile',
                       ),
                       GButton(
+                        index: 4,
                         icon: LineIcons.cog,
                         text: 'Settings',
                       ),

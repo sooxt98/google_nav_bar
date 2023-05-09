@@ -65,29 +65,35 @@ class _ExampleState extends State<Example> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
             child: GNav(
-              rippleColor: Colors.grey[300]!,
-              hoverColor: Colors.grey[100]!,
-              gap: 8,
-              activeColor: Colors.black,
-              iconSize: 24,
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-              duration: Duration(milliseconds: 400),
-              tabBackgroundColor: Colors.grey[100]!,
-              color: Colors.black,
+              buttonStyle: GButtonStyle(
+                duration: Duration(milliseconds: 400),
+                rippleColor: Colors.grey[300]!,
+                hoverColor: Colors.grey[100]!,
+                gap: 8,
+                iconActiveColor: Colors.black,
+                iconSize: 24,
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                backgroundColor: Colors.grey[100]!,
+                iconColor: Colors.black,
+              ),
               tabs: [
                 GButton(
+                  index: 0,
                   icon: LineIcons.home,
                   text: 'Home',
                 ),
                 GButton(
+                  index: 1,
                   icon: LineIcons.heart,
                   text: 'Likes',
                 ),
                 GButton(
+                  index: 2,
                   icon: LineIcons.search,
                   text: 'Search',
                 ),
                 GButton(
+                  index: 3,
                   icon: LineIcons.user,
                   text: 'Profile',
                 ),
