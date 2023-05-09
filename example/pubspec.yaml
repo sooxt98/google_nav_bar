@@ -19,7 +19,6 @@ environment:
 publish_to: none
 
 dependencies:
-  badges: ^2.0.0-nullsafety.1
   cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter

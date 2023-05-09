@@ -5,65 +5,19 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'button.dart';
 
 class GButton extends StatefulWidget {
-  final bool? active;
-  final bool? debug;
-  final bool? haptic;
-  final double? gap;
-  final Color? iconColor;
-  final Color? rippleColor;
-  final Color? hoverColor;
-  final Color? iconActiveColor;
-  final Color? textColor;
-  final EdgeInsetsGeometry? padding;
-  final EdgeInsetsGeometry? margin;
-  final TextStyle? textStyle;
-  final double? iconSize;
+  final int index;
   final Function? onPressed;
   final String text;
   final IconData icon;
-  final Color? backgroundColor;
-  final Duration? duration;
-  final Curve? curve;
-  final Gradient? backgroundGradient;
   final Widget? leading;
-  final BorderRadius? borderRadius;
-  final Border? border;
-  final Border? activeBorder;
-  final List<BoxShadow>? shadow;
-  final String? semanticLabel;
-  final GnavStyle? style;
-  final double? textSize;
 
   const GButton({
     Key? key,
-    this.active,
-    this.haptic,
-    this.backgroundColor,
+    required this.index,
     required this.icon,
-    this.iconColor,
-    this.rippleColor,
-    this.hoverColor,
-    this.iconActiveColor,
     this.text = '',
-    this.textColor,
-    this.padding,
-    this.margin,
-    this.duration,
-    this.debug,
-    this.gap,
-    this.curve,
-    this.textStyle,
-    this.iconSize,
     this.leading,
     this.onPressed,
-    this.backgroundGradient,
-    this.borderRadius,
-    this.border,
-    this.activeBorder,
-    this.shadow,
-    this.semanticLabel,
-    this.style = GnavStyle.google,
-    this.textSize,
   }) : super(key: key);
 
   @override
@@ -73,41 +27,44 @@ class GButton extends StatefulWidget {
 class _GButtonState extends State<GButton> {
   @override
   Widget build(BuildContext context) {
+    final gNav = context.gNav!;
+
     return Semantics(
-      label: widget.semanticLabel ?? widget.text,
+      label: gNav.buttonStyle.semanticLabel ?? widget.text,
       child: Button(
-        textSize: widget.textSize,
-        style: widget.style,
-        borderRadius: widget.borderRadius,
-        border: widget.border,
-        activeBorder: widget.activeBorder,
-        shadow: widget.shadow,
-        debug: widget.debug,
-        duration: widget.duration,
-        iconSize: widget.iconSize,
-        active: widget.active,
+        textSize: gNav.buttonStyle.textSize,
+        style: gNav.buttonStyle.style,
+        borderRadius: gNav.buttonStyle.borderRadius,
+        border: gNav.buttonStyle.border,
+        activeBorder: gNav.buttonStyle.activeBorder,
+        shadow: gNav.buttonStyle.shadow,
+        debug: gNav.buttonStyle.debug,
+        duration: gNav.buttonStyle.duration,
+        iconSize: gNav.buttonStyle.iconSize,
+        active: widget.index == gNav.selectedIndex,
         onPressed: () {
-          if (widget.haptic!) HapticFeedback.selectionClick();
+          if (gNav.buttonStyle.haptic) HapticFeedback.selectionClick();
           widget.onPressed?.call();
+          gNav.clickIndex(widget.index);
         },
-        padding: widget.padding,
-        margin: widget.margin,
-        gap: widget.gap,
-        color: widget.backgroundColor,
-        rippleColor: widget.rippleColor,
-        hoverColor: widget.hoverColor,
-        gradient: widget.backgroundGradient,
-        curve: widget.curve,
+        padding: gNav.buttonStyle.padding,
+        margin: gNav.buttonStyle.margin,
+        gap: gNav.buttonStyle.gap,
+        color: gNav.buttonStyle.backgroundColor,
+        rippleColor: gNav.buttonStyle.rippleColor,
+        hoverColor: gNav.buttonStyle.hoverColor,
+        gradient: gNav.buttonStyle.backgroundGradient,
+        curve: gNav.buttonStyle.curve,
         leading: widget.leading,
-        iconActiveColor: widget.iconActiveColor,
-        iconColor: widget.iconColor,
+        iconActiveColor: gNav.buttonStyle.iconActiveColor,
+        iconColor: gNav.buttonStyle.iconColor,
         icon: widget.icon,
         text: Text(
           widget.text,
-          style: widget.textStyle ??
+          style: gNav.buttonStyle.textStyle ??
               TextStyle(
                 fontWeight: FontWeight.w600,
-                color: widget.textColor,
+                color: gNav.buttonStyle.textColor,
               ),
         ),
       ),

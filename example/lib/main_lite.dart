@@ -65,27 +65,33 @@ class _MyHomePageState extends State<MyHomePage> {
               padding:
                   const EdgeInsets.symmetric(horizontal: 16.0, vertical: 25),
               child: GNav(
-                gap: 8,
-                color: Colors.grey[800],
-                activeColor: Colors.purple,
-                iconSize: 24,
-                tabBackgroundColor: Colors.purple.withOpacity(0.1),
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
-                duration: Duration(milliseconds: 1000),
+                buttonStyle: GButtonStyle(
+                  gap: 8,
+                  iconColor: Colors.grey[800],
+                  iconActiveColor: Colors.purple,
+                  iconSize: 24,
+                  backgroundColor: Colors.purple.withOpacity(0.1),
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+                  duration: Duration(milliseconds: 1000),
+                ),
                 tabs: [
                   GButton(
+                    index: 0,
                     icon: LineIcons.home,
                     text: 'Home',
                   ),
                   GButton(
+                    index: 1,
                     icon: LineIcons.heart,
                     text: 'Likes',
                   ),
                   GButton(
+                    index: 2,
                     icon: LineIcons.search,
                     text: 'Search',
                   ),
                   GButton(
+                    index: 3,
                     icon: LineIcons.user,
                     text: 'Profile',
                   )
