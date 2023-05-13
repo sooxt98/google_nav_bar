@@ -126,7 +126,6 @@ class _GNavState extends State<GNav> {
                       backgroundColor: t.backgroundColor ?? widget.tabBackgroundColor,
                       duration: widget.duration,
                       onPressed: () {
-                        if (!context.mounted) return;
                         if (!clickable) return;
                         setState(() {
                           selectedIndex = widget.tabs.indexOf(t);
@@ -138,9 +137,11 @@ class _GNavState extends State<GNav> {
                         widget.onTabChange?.call(selectedIndex);
 
                         Future.delayed(widget.duration, () {
-                          setState(() {
-                            clickable = true;
-                          });
+                          if (context.mounted) {
+                            setState(() {
+                              clickable = true;
+                            });
+                          }
                         });
                       },
                     ))
