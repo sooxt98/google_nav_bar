@@ -122,10 +122,8 @@ class _GNavState extends State<GNav> {
                       haptic: widget.haptic,
                       leading: t.leading,
                       curve: widget.curve,
-                      backgroundGradient:
-                          t.backgroundGradient ?? widget.tabBackgroundGradient,
-                      backgroundColor:
-                          t.backgroundColor ?? widget.tabBackgroundColor,
+                      backgroundGradient: t.backgroundGradient ?? widget.tabBackgroundGradient,
+                      backgroundColor: t.backgroundColor ?? widget.tabBackgroundColor,
                       duration: widget.duration,
                       onPressed: () {
                         if (!clickable) return;
@@ -139,9 +137,11 @@ class _GNavState extends State<GNav> {
                         widget.onTabChange?.call(selectedIndex);
 
                         Future.delayed(widget.duration, () {
-                          setState(() {
-                            clickable = true;
-                          });
+                          if (context.mounted) {
+                            setState(() {
+                              clickable = true;
+                            });
+                          }
                         });
                       },
                     ))

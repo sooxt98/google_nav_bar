@@ -67,7 +67,7 @@ class GButton extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _GButtonState createState() => _GButtonState();
+  createState() => _GButtonState();
 }
 
 class _GButtonState extends State<GButton> {
