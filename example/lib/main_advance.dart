@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:line_icons/line_icons.dart';
-import 'package:badges/badges.dart';
 
 void main() => runApp(TabPage());
 
@@ -36,7 +34,6 @@ class _TabPageState extends State<TabPage> {
       home: Scaffold(
         extendBody: true,
         appBar: AppBar(
-          brightness: Brightness.light,
           title: Text(
             'GoogleNavBar',
             style: TextStyle(color: Colors.black),
@@ -85,7 +82,12 @@ class _TabPageState extends State<TabPage> {
                     backgroundColor: Colors.purple.withOpacity(.2),
                     iconSize: 24,
                     padding: padding,
-                    icon: LineIcons.home,
+                    icon: CircleAvatar(
+                      radius: 12,
+                      backgroundImage: NetworkImage(
+                        'https://sooxt98.space/content/images/size/w100/2019/01/profile.png',
+                      ),
+                    ),
                     text: 'Home',
                   ),
                   GButton(
@@ -96,24 +98,12 @@ class _TabPageState extends State<TabPage> {
                     backgroundColor: Colors.pink.withOpacity(.2),
                     iconSize: 24,
                     padding: padding,
-                    icon: LineIcons.heart,
-                    leading: selectedIndex == 1 || badge == 0
-                        ? null
-                        : Badge(
-                            badgeColor: Colors.red.shade100,
-                            elevation: 0,
-                            position: BadgePosition.topEnd(top: -12, end: -12),
-                            badgeContent: Text(
-                              badge.toString(),
-                              style: TextStyle(color: Colors.red.shade900),
-                            ),
-                            child: Icon(
-                              LineIcons.heart,
-                              color: selectedIndex == 1
-                                  ? Colors.pink
-                                  : Colors.black,
-                            ),
-                          ),
+                    icon: CircleAvatar(
+                      radius: 12,
+                      backgroundImage: NetworkImage(
+                        'https://sooxt98.space/content/images/size/w100/2019/01/profile.png',
+                      ),
+                    ),
                   ),
                   GButton(
                     gap: gap,
@@ -123,7 +113,12 @@ class _TabPageState extends State<TabPage> {
                     backgroundColor: Colors.amber[600]!.withOpacity(.2),
                     iconSize: 24,
                     padding: padding,
-                    icon: LineIcons.search,
+                    icon: CircleAvatar(
+                      radius: 12,
+                      backgroundImage: NetworkImage(
+                        'https://sooxt98.space/content/images/size/w100/2019/01/profile.png',
+                      ),
+                    ),
                     text: 'Search',
                   ),
                   GButton(
@@ -134,7 +129,12 @@ class _TabPageState extends State<TabPage> {
                     backgroundColor: Colors.teal.withOpacity(.2),
                     iconSize: 24,
                     padding: padding,
-                    icon: LineIcons.user,
+                    icon: CircleAvatar(
+                      radius: 12,
+                      backgroundImage: NetworkImage(
+                        'https://sooxt98.space/content/images/size/w100/2019/01/profile.png',
+                      ),
+                    ),
                     leading: CircleAvatar(
                       radius: 12,
                       backgroundImage: NetworkImage(

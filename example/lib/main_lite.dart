@@ -74,19 +74,39 @@ class _MyHomePageState extends State<MyHomePage> {
                 duration: Duration(milliseconds: 1000),
                 tabs: [
                   GButton(
-                    icon: LineIcons.home,
+                    icon: CircleAvatar(
+                      radius: 12,
+                      backgroundImage: NetworkImage(
+                        'https://sooxt98.space/content/images/size/w100/2019/01/profile.png',
+                      ),
+                    ),
                     text: 'Home',
                   ),
                   GButton(
-                    icon: LineIcons.heart,
+                    icon: CircleAvatar(
+                      radius: 12,
+                      backgroundImage: NetworkImage(
+                        'https://sooxt98.space/content/images/size/w100/2019/01/profile.png',
+                      ),
+                    ),
                     text: 'Likes',
                   ),
                   GButton(
-                    icon: LineIcons.search,
+                    icon: CircleAvatar(
+                      radius: 12,
+                      backgroundImage: NetworkImage(
+                        'https://sooxt98.space/content/images/size/w100/2019/01/profile.png',
+                      ),
+                    ),
                     text: 'Search',
                   ),
                   GButton(
-                    icon: LineIcons.user,
+                    icon: CircleAvatar(
+                      radius: 12,
+                      backgroundImage: NetworkImage(
+                        'https://sooxt98.space/content/images/size/w100/2019/01/profile.png',
+                      ),
+                    ),
                     text: 'Profile',
                   )
                 ],

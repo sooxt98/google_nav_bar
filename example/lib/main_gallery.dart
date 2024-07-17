@@ -91,19 +91,39 @@ class _MyHomePageState extends State<MyHomePage> {
                     duration: Duration(milliseconds: 800),
                     tabs: [
                       GButton(
-                        icon: LineIcons.home,
+                        icon: CircleAvatar(
+                          radius: 12,
+                          backgroundImage: NetworkImage(
+                            'https://sooxt98.space/content/images/size/w100/2019/01/profile.png',
+                          ),
+                        ),
                         text: 'Home',
                       ),
                       GButton(
-                        icon: LineIcons.heart,
+                        icon: CircleAvatar(
+                          radius: 12,
+                          backgroundImage: NetworkImage(
+                            'https://sooxt98.space/content/images/size/w100/2019/01/profile.png',
+                          ),
+                        ),
                         text: 'Likes',
                       ),
                       GButton(
-                        icon: LineIcons.search,
+                        icon: CircleAvatar(
+                          radius: 12,
+                          backgroundImage: NetworkImage(
+                            'https://sooxt98.space/content/images/size/w100/2019/01/profile.png',
+                          ),
+                        ),
                         text: 'Search',
                       ),
                       GButton(
-                        icon: LineIcons.user,
+                        icon: CircleAvatar(
+                          radius: 12,
+                          backgroundImage: NetworkImage(
+                            'https://sooxt98.space/content/images/size/w100/2019/01/profile.png',
+                          ),
+                        ),
                         text: 'Profile',
                       ),
                     ],
@@ -141,38 +161,39 @@ class _MyHomePageState extends State<MyHomePage> {
                     duration: Duration(milliseconds: 800),
                     tabs: [
                       GButton(
-                        icon: LineIcons.home,
+                        icon: CircleAvatar(
+                          radius: 12,
+                          backgroundImage: NetworkImage(
+                            'https://sooxt98.space/content/images/size/w100/2019/01/profile.png',
+                          ),
+                        ),
                         text: 'Get',
                       ),
                       GButton(
-                        icon: LineIcons.heart,
+                        icon: CircleAvatar(
+                          radius: 12,
+                          backgroundImage: NetworkImage(
+                            'https://sooxt98.space/content/images/size/w100/2019/01/profile.png',
+                          ),
+                        ),
                         text: 'This',
-                        leading: selectedIndex == 1 || badge == 0
-                            ? null
-                            : Badge(
-                                badgeColor: Colors.red.shade100,
-                                elevation: 0,
-                                position:
-                                    BadgePosition.topEnd(top: -12, end: -12),
-                                badgeContent: Text(
-                                  badge.toString(),
-                                  style: TextStyle(color: Colors.red.shade900),
-                                ),
-                                child: Icon(
-                                  LineIcons.heart,
-                                  size: 20,
-                                  color: selectedIndex == 1
-                                      ? Colors.pink
-                                      : Colors.black,
-                                ),
-                              ),
                       ),
                       GButton(
-                        icon: LineIcons.search,
+                        icon: CircleAvatar(
+                          radius: 12,
+                          backgroundImage: NetworkImage(
+                            'https://sooxt98.space/content/images/size/w100/2019/01/profile.png',
+                          ),
+                        ),
                         text: 'NavBar',
                       ),
                       GButton(
-                        icon: LineIcons.user,
+                        icon: CircleAvatar(
+                          radius: 12,
+                          backgroundImage: NetworkImage(
+                            'https://sooxt98.space/content/images/size/w100/2019/01/profile.png',
+                          ),
+                        ),
                         text: 'Now!',
                         leading: CircleAvatar(
                           radius: 12,
@@ -202,7 +223,12 @@ class _MyHomePageState extends State<MyHomePage> {
                         textColor: Colors.purple,
                         backgroundColor: Colors.purple.withOpacity(.2),
                         iconSize: 24,
-                        icon: LineIcons.home,
+                        icon: CircleAvatar(
+                          radius: 12,
+                          backgroundImage: NetworkImage(
+                            'https://sooxt98.space/content/images/size/w100/2019/01/profile.png',
+                          ),
+                        ),
                         text: 'Home',
                       ),
                       GButton(
@@ -211,7 +237,12 @@ class _MyHomePageState extends State<MyHomePage> {
                         textColor: Colors.pink,
                         backgroundColor: Colors.pink.withOpacity(.2),
                         iconSize: 24,
-                        icon: LineIcons.heart,
+                        icon: CircleAvatar(
+                          radius: 12,
+                          backgroundImage: NetworkImage(
+                            'https://sooxt98.space/content/images/size/w100/2019/01/profile.png',
+                          ),
+                        ),
                         text: 'Likes',
                       ),
                       GButton(
@@ -220,7 +251,12 @@ class _MyHomePageState extends State<MyHomePage> {
                         textColor: Colors.amber[600],
                         backgroundColor: Colors.amber[600]!.withOpacity(.2),
                         iconSize: 24,
-                        icon: LineIcons.search,
+                        icon: CircleAvatar(
+                          radius: 12,
+                          backgroundImage: NetworkImage(
+                            'https://sooxt98.space/content/images/size/w100/2019/01/profile.png',
+                          ),
+                        ),
                         text: 'Search',
                       ),
                       GButton(
@@ -229,7 +265,12 @@ class _MyHomePageState extends State<MyHomePage> {
                         textColor: Colors.teal,
                         backgroundColor: Colors.teal.withOpacity(.2),
                         iconSize: 24,
-                        icon: LineIcons.user,
+                        icon: CircleAvatar(
+                          radius: 12,
+                          backgroundImage: NetworkImage(
+                            'https://sooxt98.space/content/images/size/w100/2019/01/profile.png',
+                          ),
+                        ),
                         text: 'Profile',
                       )
                     ],
@@ -261,23 +302,48 @@ class _MyHomePageState extends State<MyHomePage> {
                     duration: Duration(milliseconds: 800),
                     tabs: [
                       GButton(
-                        icon: LineIcons.home,
+                        icon: CircleAvatar(
+                          radius: 12,
+                          backgroundImage: NetworkImage(
+                            'https://sooxt98.space/content/images/size/w100/2019/01/profile.png',
+                          ),
+                        ),
                         text: 'Home',
                       ),
                       GButton(
-                        icon: LineIcons.heart,
+                        icon: CircleAvatar(
+                          radius: 12,
+                          backgroundImage: NetworkImage(
+                            'https://sooxt98.space/content/images/size/w100/2019/01/profile.png',
+                          ),
+                        ),
                         text: 'Likes',
                       ),
                       GButton(
-                        icon: LineIcons.search,
+                        icon: CircleAvatar(
+                          radius: 12,
+                          backgroundImage: NetworkImage(
+                            'https://sooxt98.space/content/images/size/w100/2019/01/profile.png',
+                          ),
+                        ),
                         text: 'Search',
                       ),
                       GButton(
-                        icon: LineIcons.user,
+                        icon: CircleAvatar(
+                          radius: 12,
+                          backgroundImage: NetworkImage(
+                            'https://sooxt98.space/content/images/size/w100/2019/01/profile.png',
+                          ),
+                        ),
                         text: 'Profile',
                       ),
                       GButton(
-                        icon: LineIcons.cog,
+                        icon: CircleAvatar(
+                          radius: 12,
+                          backgroundImage: NetworkImage(
+                            'https://sooxt98.space/content/images/size/w100/2019/01/profile.png',
+                          ),
+                        ),
                         text: 'Settings',
                       ),
                     ],
