@@ -1,3 +1,7 @@
+## 5.0.7
+* Fixed setState() called after dispose()
+* Migrated to Android embedding v2
+
 ## 5.0.6
 * Fixed GButton empty text extra spacing
 * Migrated to Android embedding v2
