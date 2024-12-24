@@ -47,6 +47,7 @@ GNav(
   iconSize: 24, // tab button icon size
   tabBackgroundColor: Colors.purple.withOpacity(0.1), // selected tab background color
   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5), // navigation bar padding
+  axis: GnavAxis.horizontal // Define the nav bar axis
   tabs: [
     GButton(
       icon: LineIcons.home,
