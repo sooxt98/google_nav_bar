@@ -7,6 +7,11 @@ enum GnavStyle {
   oldSchool,
 }
 
+enum GnavAxis {
+  horizontal,
+  vertical
+}
+
 class GNav extends StatefulWidget {
   const GNav({
     Key? key,
@@ -36,6 +41,7 @@ class GNav extends StatefulWidget {
     this.mainAxisAlignment = MainAxisAlignment.spaceBetween,
     this.style = GnavStyle.google,
     this.textSize,
+    this.axis = GnavAxis.horizontal
   }) : super(key: key);
 
   final List<GButton> tabs;
@@ -64,6 +70,7 @@ class GNav extends StatefulWidget {
   final MainAxisAlignment mainAxisAlignment;
   final GnavStyle? style;
   final double? textSize;
+  final GnavAxis? axis;
 
   @override
   _GNavState createState() => _GNavState();
@@ -91,8 +98,9 @@ class _GNavState extends State<GNav> {
   Widget build(BuildContext context) {
     return Container(
         color: widget.backgroundColor,
-        child: Row(
+        child: Flex(
             mainAxisAlignment: widget.mainAxisAlignment,
+            direction: widget.axis == GnavAxis.horizontal ? Axis.horizontal : Axis.vertical,
             children: widget.tabs
                 .map((t) => GButton(
                       textSize: widget.textSize,
