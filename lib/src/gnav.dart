@@ -36,6 +36,7 @@ class GNav extends StatefulWidget {
     this.mainAxisAlignment = MainAxisAlignment.spaceBetween,
     this.style = GnavStyle.google,
     this.textSize,
+    this.selectedGbuttonSize
   }) : super(key: key);
 
   final List<GButton> tabs;
@@ -64,6 +65,7 @@ class GNav extends StatefulWidget {
   final MainAxisAlignment mainAxisAlignment;
   final GnavStyle? style;
   final double? textSize;
+  final Size? selectedGbuttonSize;
 
   @override
   _GNavState createState() => _GNavState();
@@ -94,7 +96,7 @@ class _GNavState extends State<GNav> {
         child: Row(
             mainAxisAlignment: widget.mainAxisAlignment,
             children: widget.tabs
-                .map((t) => GButton(
+                .map((t) => GButton(                                            
                       textSize: widget.textSize,
                       style: widget.style,
                       key: t.key,
@@ -127,17 +129,18 @@ class _GNavState extends State<GNav> {
                       backgroundColor:
                           t.backgroundColor ?? widget.tabBackgroundColor,
                       duration: widget.duration,
+                      size: selectedIndex == widget.tabs.indexOf(t) ? widget.selectedGbuttonSize : null ,
                       onPressed: () {
                         if (!clickable) return;
                         setState(() {
                           selectedIndex = widget.tabs.indexOf(t);
                           clickable = false;
                         });
-
+                
                         t.onPressed?.call();
-
+                
                         widget.onTabChange?.call(selectedIndex);
-
+                
                         Future.delayed(widget.duration, () {
                           if (context.mounted) {
                             setState(() {
